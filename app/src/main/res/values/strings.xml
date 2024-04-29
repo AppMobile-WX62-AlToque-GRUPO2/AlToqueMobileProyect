@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Altoque</string>
+    <string name="cust_title_generate_post">Crear publicación</string>
+    <string name="et_title_post">Título</string>
+    <string name="et_dist_post">Distrito</string>
+    <string name="et_desc_post">Descripción</string>
+    <string name="et_spc_post">Especialidad</string>
+    <string name="et_time_post">Horario</string>
+    <string name="bt_send_post">Publicar</string>
+    <string name="bt_to_create">Ir a CustomerCreatePost</string>
 </resources>
