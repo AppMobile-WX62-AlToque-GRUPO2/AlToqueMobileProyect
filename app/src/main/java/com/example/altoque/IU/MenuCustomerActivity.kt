@@ -2,6 +2,7 @@ package com.example.altoque.IU
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -25,9 +26,10 @@ class MenuCustomerActivity : AppCompatActivity() {
         
         GoToCreatePost()
         GoToProfile()
+        GoToNotifications()
         GoToMyPosts()
         GoToMyPosts2()
-        
+    
     }
     
     private fun GoToCreatePost() {
@@ -43,6 +45,14 @@ class MenuCustomerActivity : AppCompatActivity() {
         
         llMyProfile.setOnClickListener {
             startActivity(Intent(this, clientProfileActivity::class.java))
+        }
+    }
+    
+    private fun GoToNotifications() {
+        val ibCustNotifications = findViewById<ImageButton>(R.id.ibCustNotifications)
+        
+        ibCustNotifications.setOnClickListener {
+            startActivity(Intent(this, ClientNotification::class.java))
         }
     }
     

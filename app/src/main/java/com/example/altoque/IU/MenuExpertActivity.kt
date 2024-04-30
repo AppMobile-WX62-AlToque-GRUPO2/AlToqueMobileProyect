@@ -2,6 +2,7 @@ package com.example.altoque.IU
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -25,6 +26,7 @@ class MenuExpertActivity : AppCompatActivity() {
         
         GoToAgenda()
         GoToProfile()
+        GoToNotifications()
         GoToServices()
         GoToServices2()
         
@@ -43,6 +45,14 @@ class MenuExpertActivity : AppCompatActivity() {
         
         llExpMyProfile.setOnClickListener {
             startActivity(Intent(this, AgendaActivity::class.java))
+        }
+    }
+    
+    private fun GoToNotifications() {
+        val ibExpNotifications = findViewById<ImageButton>(R.id.ibExpNotifications)
+        
+        ibExpNotifications.setOnClickListener {
+            startActivity(Intent(this, SpecialistNotification::class.java))
         }
     }
     
