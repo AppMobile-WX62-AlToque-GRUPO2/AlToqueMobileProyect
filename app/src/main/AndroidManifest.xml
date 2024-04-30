@@ -56,11 +56,17 @@
             android:name=".IU.AgendaActivity"
             android:exported="false" />
         <activity
+            android:name=".IU.SpecialistNotification"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ClientNotification"
+            android:exported="false" />
+        <activity
             android:name=".IU.AltoqueInicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
