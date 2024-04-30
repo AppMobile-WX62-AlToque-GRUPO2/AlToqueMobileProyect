@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">Altoque</string>
+    <string name="PublicationTitle">Mis Publicaciones</string>
+    <string name="backButtonDescription">Button to previous page</string>
+    <string name="publicationDescription">Image of Publication</string>
+    <string name="deletePublicationButtonDescription">Delete Publication Button</string>
+    <string name="editPublicationButtonDescription">editPublicationButton</string>
+    <string name="verMasString">VER MÁS</string>
+    <string name="publication_time">Publication Time</string>
+    <string name="request_location">Request Location</string>
+    <string name="publication_title">Publication Title</string>
+    <string name="exampleLoremText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset.</string>
+    <string name="publication_image">Publication Image</string>
+    <string name="description_title">Description</string>
+    <string name="profesionales_que_aceptaron">Profesionales que aceptaron</string>
+    <string name="Horario_description">Imagen de horario</string>
+    <string name="time_range_string">00:00 - 00:00</string>
+    <string name="horarios_disponibles_title">Horarios Disponibles</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="nombre_completo">Nombre Completo:</string>
+    <string name="accept_button_description">Accept Button</string>
+    <string name="especialistimagedescription">EspecialistImageDescription</string>
+    <string name="numero_telefonico">Número Telefónico:</string>
+    <string name="correo_electronico">Correo Electrónico:</string>
+    <string name="declinebuttondescription">declineButtonDescription</string>
+    <string name="especialidad">Especialidad</string>
+    <string name="descripcion">Descripción</string>
+    <string name="recomendation_count">500</string>
+    <string name="works_count">250</string>
+    <string name="recomendaciones_title">Recomendaciones</string>
+    <string name="works_count_title">Trabajos hechos</string>
+    <string name="rating">Rating</string>
+    <string name="contactar">Contactar</string>
+    <string name="especialist_image_description">Especialist Image Description</string>
 </resources>
