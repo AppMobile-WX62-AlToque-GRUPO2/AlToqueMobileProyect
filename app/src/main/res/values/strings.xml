@@ -61,4 +61,5 @@
     <string name="mi_impresora_no_prende_y_esta_conectado_todos_los_cables_necesito_ayuda_urgente">Mi Impresora no prende y esta conectado todos los cables, necesito ayuda urgente</string>
     <string name="lima_san_isidro">Lima, San Isidro</string>
     <string name="hace_20_min_16_04_2024">Hace 20 min - 16/04/2024</string>
+    <string name="btSpcMenuProfile">Ver perfil de especialista</string>
 </resources>
