@@ -19,13 +19,13 @@
             android:name=".IU.IniciarSesion"
             android:exported="false" />
         <activity
-            android:name=".IU.AltoqueInicio"
+            android:name=".IU.MainActivity"
             android:exported="false" />
         <activity
             android:name=".IU.CustomerCreatePost"
             android:exported="false"/>
         <activity
-            android:name=".IU.MainActivity"
+            android:name=".IU.AltoqueInicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
