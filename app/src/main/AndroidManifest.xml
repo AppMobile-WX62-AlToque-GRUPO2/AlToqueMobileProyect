@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Altoque"
         tools:targetApi="31">
         <activity
+            android:name=".IU.SpecialistNotification"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ClientNotification"
+            android:exported="false" />
+        <activity
             android:name=".IU.MainActivity"
             android:exported="true">
             <intent-filter>
