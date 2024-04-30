@@ -7,8 +7,8 @@
     <string name="et_spc_post">Especialidad</string>
     <string name="et_time_post">Horario</string>
     <string name="bt_send_post">Publicar</string>
-    <string name="bt_to_create">Ir a CustomerCreatePost</string>
+    <string name="bt_to_create">Crear una publicación</string>
     <string name="mi_perfil">Mi Perfil</string>
-    <string name="profile">Profile</string>
+    <string name="profile">Ver perfil</string>
     <string name="primer_nombre">Primer nombre</string>
 </resources>
