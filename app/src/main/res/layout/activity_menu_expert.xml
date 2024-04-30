@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IU.MenuCustomerActivity">
+    tools:context=".IU.MenuExpertActivity">
     
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
         
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCustMyPosts"
+            android:id="@+id/rvExpServices"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
@@ -35,43 +35,43 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:background="#D6D6D6"
-            app:layout_constraintBottom_toTopOf="@+id/tvCustMenu"
+            app:layout_constraintBottom_toTopOf="@+id/tvExpMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustPosts">
+            app:layout_constraintTop_toBottomOf="@+id/tvExpServices">
         
         </androidx.recyclerview.widget.RecyclerView>
         
         <TextView
-            android:id="@+id/tvCustPosts"
+            android:id="@+id/tvExpServices"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:text="Mis publicaciones"
+            android:text="Servicios recomendados"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustMenuName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvExpMenuName" />
         
         <TextView
-            android:id="@+id/tvCustMenuName"
+            android:id="@+id/tvExpMenuName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="Rafael Urquiaga"
+            android:text="Alexander Campos"
             android:textColor="#ED254E"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustMenuWelcome" />
+            app:layout_constraintTop_toBottomOf="@+id/tvExpMenuWelcome" />
         
         <TextView
-            android:id="@+id/tvCustMenuWelcome"
+            android:id="@+id/tvExpMenuWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -81,10 +81,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustMenuTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvExpMenuTitle" />
         
         <TextView
-            android:id="@+id/tvCustMenuTitle"
+            android:id="@+id/tvExpMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toTopOf="parent" />
         
         <TextView
-            android:id="@+id/tvCustMenu"
+            android:id="@+id/tvExpMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -106,12 +106,12 @@
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/llCustMyProfile"
+            app:layout_constraintBottom_toTopOf="@+id/llExpMyProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
         
         <LinearLayout
-            android:id="@+id/llCustMyProfile"
+            android:id="@+id/llExpMyProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -122,16 +122,16 @@
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/llCustCreatePosts">
+            app:layout_constraintStart_toEndOf="@+id/llExpAgenda">
             
             <ImageView
-                android:id="@+id/ivCustProfile"
+                android:id="@+id/ivExpProfile"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:src="@android:drawable/ic_menu_gallery" />
             
             <TextView
-                android:id="@+id/tvCustMyProfile"
+                android:id="@+id/tvExpMyProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mi perfil"
@@ -141,7 +141,7 @@
         </LinearLayout>
         
         <LinearLayout
-            android:id="@+id/llCustCreatePosts"
+            android:id="@+id/llExpAgenda"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -151,27 +151,27 @@
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llCustMyProfile"
+            app:layout_constraintEnd_toStartOf="@+id/llExpMyProfile"
             app:layout_constraintStart_toStartOf="parent">
             
             <ImageView
-                android:id="@+id/ivCustCreatePosts"
+                android:id="@+id/ivExpAgenda"
                 android:layout_width="match_parent"
                 android:layout_height="119dp"
                 android:src="@android:drawable/ic_menu_gallery" />
             
             <TextView
-                android:id="@+id/tvCustCreatePosts"
+                android:id="@+id/tvExpAgenda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crear publicación"
+                android:text="Agenda"
                 android:textAlignment="center"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
         
         <ImageButton
-            android:id="@+id/ibCustNotifications"
+            android:id="@+id/ibExpNotifications"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
@@ -182,5 +182,5 @@
             app:srcCompat="@android:drawable/stat_sys_headset" />
     
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

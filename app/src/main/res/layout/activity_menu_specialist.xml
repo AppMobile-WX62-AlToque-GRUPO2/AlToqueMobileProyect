@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
         
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvServices"
+            android:id="@+id/rvMyAssigments"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
@@ -35,16 +35,16 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:background="#D6D6D6"
-            app:layout_constraintBottom_toTopOf="@+id/tvMenu"
+            app:layout_constraintBottom_toTopOf="@+id/tvSpcMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvServices">
+            app:layout_constraintTop_toBottomOf="@+id/tvServicesRecomendation">
         
         </androidx.recyclerview.widget.RecyclerView>
         
         <TextView
-            android:id="@+id/tvServices"
+            android:id="@+id/tvServicesRecomendation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -56,10 +56,10 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSpcMenuName" />
         
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tvSpcMenuName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -68,10 +68,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHello" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSpcMenuWelcome" />
         
         <TextView
-            android:id="@+id/tvHello"
+            android:id="@+id/tvSpcMenuWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -81,10 +81,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHeading" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSpcMenuTitle" />
         
         <TextView
-            android:id="@+id/tvHeading"
+            android:id="@+id/tvSpcMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toTopOf="parent" />
         
         <TextView
-            android:id="@+id/tvMenu"
+            android:id="@+id/tvSpcMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -106,12 +106,12 @@
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/llAgenda"
+            app:layout_constraintBottom_toTopOf="@+id/llSpcMyProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
         
         <LinearLayout
-            android:id="@+id/llAgenda"
+            android:id="@+id/llSpcMyProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -122,26 +122,26 @@
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout">
+            app:layout_constraintStart_toEndOf="@+id/llSpcMyAgenda">
             
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/ivSpcProfile"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:src="@android:drawable/ic_menu_gallery" />
             
             <TextView
-                android:id="@+id/tvMyAgenda"
+                android:id="@+id/tvSpcMyProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="My Agenda"
+                android:text="Mi perfil"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
         
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/llSpcMyAgenda"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -151,31 +151,32 @@
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llAgenda"
+            app:layout_constraintEnd_toStartOf="@+id/llSpcMyProfile"
             app:layout_constraintStart_toStartOf="parent">
             
             <ImageView
-                android:id="@+id/ivSee1"
+                android:id="@+id/ivSpcMyAgenda"
                 android:layout_width="match_parent"
                 android:layout_height="119dp"
                 android:src="@android:drawable/ic_menu_gallery" />
             
             <TextView
-                android:id="@+id/tvWatch"
+                android:id="@+id/tvSpcMyAgenda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Servicios"
+                android:text="Mi agenda"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
         
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/ibSpcNotifications"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="icono de notificaciones"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/stat_sys_headset" />

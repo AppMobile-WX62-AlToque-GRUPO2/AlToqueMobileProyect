@@ -24,30 +24,40 @@ class MenuSpecialistActivity : AppCompatActivity() {
         }
         
         GoToAgenda()
+        GoToProfile()
         GoToPublication()
         GoToPublication2()
         
     }
     
     private fun GoToAgenda() {
-        val llAgenda = findViewById<LinearLayout>(R.id.llAgenda)
+        val llSpcMyAgenda = findViewById<LinearLayout>(R.id.llSpcMyAgenda)
         
-        llAgenda.setOnClickListener {
+        llSpcMyAgenda.setOnClickListener {
             startActivity(Intent(this, AgendaActivity::class.java))
         }
     }
-    private fun GoToPublication() {
-        val rvServices = findViewById<RecyclerView>(R.id.rvServices)
+    
+    private fun GoToProfile() {
+        val llSpcMyProfile = findViewById<LinearLayout>(R.id.llSpcMyProfile)
         
-        rvServices.setOnClickListener {
+        llSpcMyProfile.setOnClickListener {
+            startActivity(Intent(this, AgendaActivity::class.java))
+        }
+    }
+    
+    private fun GoToPublication() {
+        val rvMyAssigments = findViewById<RecyclerView>(R.id.rvMyAssigments)
+        
+        rvMyAssigments.setOnClickListener {
             startActivity(Intent(this, PublicationActivity::class.java))
         }
     }
     
     private fun GoToPublication2() {
-        val tvServices = findViewById<TextView>(R.id.tvServices)
+        val tvServicesRecomendation = findViewById<TextView>(R.id.tvServicesRecomendation)
         
-        tvServices.setOnClickListener {
+        tvServicesRecomendation.setOnClickListener {
             startActivity(Intent(this, PublicationActivity::class.java))
         }
     }

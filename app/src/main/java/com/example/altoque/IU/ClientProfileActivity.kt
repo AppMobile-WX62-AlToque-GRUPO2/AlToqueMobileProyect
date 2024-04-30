@@ -14,10 +14,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.altoque.R
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.icu.util.Calendar
 import android.net.Uri
 import android.provider.MediaStore
 import android.widget.ImageView
@@ -57,7 +55,7 @@ class clientProfileActivity : AppCompatActivity() {
 
     private fun setupView() {
         val btBack = findViewById<Button>(R.id.btBack)
-        val tvName = findViewById<TextView>(R.id.tvName)
+        val tvName = findViewById<TextView>(R.id.tvCustMenuName)
         val etName = findViewById<EditText>(R.id.etName)
         val tvLastname = findViewById<TextView>(R.id.tvLastname)
         val etLastname = findViewById<EditText>(R.id.etLastname)

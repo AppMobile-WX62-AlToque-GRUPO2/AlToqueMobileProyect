@@ -9,7 +9,7 @@
     tools:context=".IU.clientProfileActivity">
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvCustMenuName"
         android:layout_width="0dp"
         android:layout_height="15dp"
         android:layout_marginStart="50dp"
@@ -37,7 +37,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvName" />
+        app:layout_constraintTop_toTopOf="@+id/tvCustMenuName" />
 
     <Button
         android:id="@+id/btBack"

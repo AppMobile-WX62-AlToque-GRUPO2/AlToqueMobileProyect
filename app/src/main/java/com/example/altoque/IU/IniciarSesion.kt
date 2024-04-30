@@ -38,12 +38,12 @@ class IniciarSesion : AppCompatActivity() {
                 when (rol) {
                     "ESPECIALISTA" -> {
                         //COLOCAR EL NOMBRE DEL ACTIVITY
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, MenuExpertActivity::class.java)
                         startActivity(intent)
                     }
                     "CLIENTE" -> {
                         //COLOCAR EL NOMBRE DEL ACTIVITY
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, MenuCustomerActivity::class.java)
                         startActivity(intent)
                     }
                     else -> {

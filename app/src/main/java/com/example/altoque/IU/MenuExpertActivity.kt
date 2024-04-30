@@ -11,54 +11,54 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.altoque.R
 
-class MenuCustomerActivity : AppCompatActivity() {
+class MenuExpertActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_menu_customer)
+        setContentView(R.layout.activity_menu_expert)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
         
-        GoToCreatePost()
+        GoToAgenda()
         GoToProfile()
-        GoToMyPosts()
-        GoToMyPosts2()
+        GoToServices()
+        GoToServices2()
         
     }
     
-    private fun GoToCreatePost() {
-        val llCreatePosts = findViewById<LinearLayout>(R.id.llCustCreatePosts)
+    private fun GoToAgenda() {
+        val llExpAgenda = findViewById<LinearLayout>(R.id.llExpAgenda)
         
-        llCreatePosts.setOnClickListener {
-            startActivity(Intent(this, CustomerCreatePost::class.java))
+        llExpAgenda.setOnClickListener {
+            startActivity(Intent(this, AgendaActivity::class.java))
         }
     }
     
     private fun GoToProfile() {
-        val llMyProfile = findViewById<LinearLayout>(R.id.llCustMyProfile)
+        val llExpMyProfile = findViewById<LinearLayout>(R.id.llExpMyProfile)
         
-        llMyProfile.setOnClickListener {
-            startActivity(Intent(this, clientProfileActivity::class.java))
+        llExpMyProfile.setOnClickListener {
+            startActivity(Intent(this, AgendaActivity::class.java))
         }
     }
     
-    private fun GoToMyPosts() {
-        val rvMyPosts = findViewById<RecyclerView>(R.id.rvCustMyPosts)
+    private fun GoToServices() {
+        val rvExpServices = findViewById<RecyclerView>(R.id.rvExpServices)
         
-        rvMyPosts.setOnClickListener {
-            startActivity(Intent(this, PublicationList::class.java))
+        rvExpServices.setOnClickListener {
+            startActivity(Intent(this, PublicationActivity::class.java))
         }
     }
     
-    private fun GoToMyPosts2() {
-        val tvPosts = findViewById<TextView>(R.id.tvCustPosts)
+    private fun GoToServices2() {
+        val tvExpServices = findViewById<TextView>(R.id.tvExpServices)
         
-        tvPosts.setOnClickListener {
-            startActivity(Intent(this, PublicationList::class.java))
+        tvExpServices.setOnClickListener {
+            startActivity(Intent(this, PublicationActivity::class.java))
         }
     }
     
