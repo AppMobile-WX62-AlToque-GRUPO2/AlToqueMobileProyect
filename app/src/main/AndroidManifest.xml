@@ -35,6 +35,9 @@
             android:name=".IU.PublicationList"
             android:exported="false" />
         <activity
+            android:name=".IU.SpecialistProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".IU.clientProfileActivity"
             android:exported="false" />
         <activity

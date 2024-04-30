@@ -48,8 +48,16 @@ class MainActivity : AppCompatActivity() {
     private fun setupViews() {
         val btProfile = findViewById<Button>(R.id.btProfile)
         
+        val btProfileSpecialist = findViewById<Button>(R.id.btProfileSpecialist)
+
         btProfile.setOnClickListener {
             startActivity(Intent(this, clientProfileActivity::class.java))
         }
+
+        btProfileSpecialist.setOnClickListener {
+            startActivity(Intent(this, SpecialistProfileActivity::class.java))
+        }
     }
+
+
 }
