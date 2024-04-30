@@ -46,6 +46,12 @@
             android:name=".IU.CustomerCreatePost"
             android:exported="false"/>
         <activity
+            android:name=".IU.PublicationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.AgendaActivity"
+            android:exported="false" />
+        <activity
             android:name=".IU.AltoqueInicio"
             android:exported="true">
             <intent-filter>
