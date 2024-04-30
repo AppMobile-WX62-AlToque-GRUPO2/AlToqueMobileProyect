@@ -26,10 +26,20 @@ class MainActivity : AppCompatActivity() {
             redirectToCreationEnvironment()
         }
         
+        setupViews()
+        
     }
     
     fun redirectToCreationEnvironment(){
         val intent = Intent(this, CustomerCreatePost::class.java)
         startActivity(intent)
+    }
+    
+    private fun setupViews() {
+        val btProfile = findViewById<Button>(R.id.btProfile)
+        
+        btProfile.setOnClickListener {
+            startActivity(Intent(this, clientProfileActivity::class.java))
+        }
     }
 }

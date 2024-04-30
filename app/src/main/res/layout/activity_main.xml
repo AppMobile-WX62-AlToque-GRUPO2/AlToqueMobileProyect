@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".IU.MainActivity">
     
-    
     <Button
         android:id="@+id/btToCreate"
         android:layout_width="wrap_content"
@@ -17,4 +16,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    
+    <Button
+        android:id="@+id/btProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="258dp"
+        android:layout_marginEnd="167dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
