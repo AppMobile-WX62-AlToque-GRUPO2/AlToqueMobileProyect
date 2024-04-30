@@ -13,13 +13,13 @@
         android:theme="@style/Theme.Altoque"
         tools:targetApi="31">
         <activity
-            android:name=".Registrarse"
+            android:name=".IU.Registrarse"
             android:exported="false" />
         <activity
-            android:name=".IniciarSesion"
+            android:name=".IU.IniciarSesion"
             android:exported="false" />
         <activity
-            android:name=".AltoqueInicio"
+            android:name=".IU.AltoqueInicio"
             android:exported="false" />
         <activity
             android:name=".IU.MainActivity"

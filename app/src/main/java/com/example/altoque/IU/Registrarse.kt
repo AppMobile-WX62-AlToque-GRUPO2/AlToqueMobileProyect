@@ -1,4 +1,4 @@
-package com.example.altoque
+package com.example.altoque.IU
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.altoque.IU.MainActivity
+import com.example.altoque.R
 
 class Registrarse : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
