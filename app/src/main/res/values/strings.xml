@@ -43,4 +43,5 @@
     <string name="rating">Rating</string>
     <string name="contactar">Contactar</string>
     <string name="especialist_image_description">Especialist Image Description</string>
+    <string name="bt_list_post">Ver mis publicaciones</string>
 </resources>

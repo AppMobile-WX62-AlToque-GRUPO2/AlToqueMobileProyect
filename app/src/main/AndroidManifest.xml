@@ -22,13 +22,13 @@
         android:theme="@style/Theme.Altoque"
         tools:targetApi="31">
         <activity
-            android:name=".publication_detail_especialist"
+            android:name=".IU.PublicationDetailEspecialist"
             android:exported="false" />
         <activity
-            android:name=".publication_detail"
+            android:name=".IU.PublicationDetail"
             android:exported="false" />
         <activity
-            android:name=".publication_list"
+            android:name=".IU.PublicationList"
             android:exported="false" />
         <activity
             android:name=".IU.clientProfileActivity"

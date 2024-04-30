@@ -26,12 +26,22 @@ class MainActivity : AppCompatActivity() {
             redirectToCreationEnvironment()
         }
         
+        val btListPost = findViewById<Button>(R.id.btListPost)
+        btListPost.setOnClickListener{
+            redirectToListPost()
+        }
+        
         setupViews()
         
     }
     
     fun redirectToCreationEnvironment(){
         val intent = Intent(this, CustomerCreatePost::class.java)
+        startActivity(intent)
+    }
+    
+    fun redirectToListPost(){
+        val intent = Intent(this, PublicationList::class.java)
         startActivity(intent)
     }
     
