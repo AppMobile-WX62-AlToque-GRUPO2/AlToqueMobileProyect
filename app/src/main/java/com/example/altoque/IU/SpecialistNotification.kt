@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.altoque.R
 import com.example.altoque.adapter.NotificationAdapter
 import com.example.altoque.models.Notification
-import com.example.altoque.networking.AlToqueService
+import com.example.altoque.networking.NotificationService
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -43,7 +43,7 @@ class SpecialistNotification : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            val service = retrofit.create(AlToqueService::class.java)
+            val service = retrofit.create(NotificationService::class.java)
 
             val request = service.getNotifications()
 
