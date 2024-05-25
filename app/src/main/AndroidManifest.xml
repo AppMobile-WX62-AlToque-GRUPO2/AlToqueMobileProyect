@@ -5,10 +5,10 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -73,8 +73,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".IU.MainActivity"
-            android:exported="true" />
     </application>
 </manifest>

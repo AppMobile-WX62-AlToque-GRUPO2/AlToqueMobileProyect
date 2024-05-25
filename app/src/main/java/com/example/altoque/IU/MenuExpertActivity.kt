@@ -11,8 +11,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.altoque.R
+import com.example.altoque.adapter.PostAdapter
+import com.example.altoque.models.Post
+import com.example.altoque.networking.AlToqueService
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MenuExpertActivity : AppCompatActivity() {
+
+    lateinit var posts : List<Post>
+    lateinit var postsAdapter: PostAdapter
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,53 +32,39 @@ class MenuExpertActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        
-        GoToAgenda()
-        GoToProfile()
-        GoToNotifications()
-        GoToServices()
-        GoToServices2()
+
+        postsAdapter = PostAdapter(emptyList())
+
+        loadPublications()
         
     }
-    
-    private fun GoToAgenda() {
-        val llExpAgenda = findViewById<LinearLayout>(R.id.llExpAgenda)
-        
-        llExpAgenda.setOnClickListener {
-            startActivity(Intent(this, AgendaActivity::class.java))
-        }
-    }
-    
-    private fun GoToProfile() {
-        val llExpMyProfile = findViewById<LinearLayout>(R.id.llExpMyProfile)
-        
-        llExpMyProfile.setOnClickListener {
-            startActivity(Intent(this, SpecialistProfileActivity::class.java))
-        }
-    }
-    
-    private fun GoToNotifications() {
-        val ibExpNotifications = findViewById<ImageButton>(R.id.ibExpNotifications)
-        
-        ibExpNotifications.setOnClickListener {
-            startActivity(Intent(this, SpecialistNotification::class.java))
-        }
-    }
-    
-    private fun GoToServices() {
-        val rvExpServices = findViewById<RecyclerView>(R.id.rvExpServices)
-        
-        rvExpServices.setOnClickListener {
-            startActivity(Intent(this, PublicationActivity::class.java))
-        }
-    }
-    
-    private fun GoToServices2() {
-        val tvExpServices = findViewById<TextView>(R.id.tvExpServices)
-        
-        tvExpServices.setOnClickListener {
-            startActivity(Intent(this, PublicationActivity::class.java))
-        }
+
+    private fun loadPublications() {
+        val rvPosts = findViewById<RecyclerView>(R.id.rvPostSpecialist)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://altoquebackendapi.onrender.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(AlToqueService::class.java)
+
+        val request = service.getPosts()
+
+        request.enqueue(object : retrofit2.Callback<List<Post>> {
+            override fun onResponse(call: Call<List<Post>>, response: retrofit2.Response<List<Post>>) {
+                if (response.isSuccessful) {
+                    posts = response.body()!!
+                    postsAdapter = PostAdapter(posts)
+                    rvPosts.adapter = postsAdapter
+                    rvPosts.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MenuExpertActivity)
+                }
+            }
+
+            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
     }
     
 }

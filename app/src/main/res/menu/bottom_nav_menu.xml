@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/navigation_notifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@android:drawable/ic_dialog_alert"
-        android:title="Noty" />
-    <item
-        android:id="@+id/navigation_dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@android:drawable/ic_dialog_dialer"
-        android:title="Config" />
     <item
         android:id="@+id/navigation_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@android:drawable/ic_notification_overlay"
+        android:icon="@drawable/baseline_home_24"
         android:title="Home" />
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="Settings" />
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="Profile" />
 </menu>
