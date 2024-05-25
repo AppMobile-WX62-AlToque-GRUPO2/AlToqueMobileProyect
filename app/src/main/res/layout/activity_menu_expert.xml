@@ -6,181 +6,208 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".IU.MenuExpertActivity">
-    
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="#FFC107"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:menu="@menu/bottom_nav_menu" />
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#FFFFFF"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvExpServices"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
-            android:background="#D6D6D6"
-            app:layout_constraintBottom_toTopOf="@+id/tvExpMenu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvExpServices">
-        
-        </androidx.recyclerview.widget.RecyclerView>
-        
+
         <TextView
-            android:id="@+id/tvExpServices"
+            android:id="@+id/tvServicesRecomendation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
-            android:text="Servicios recomendados"
-            android:textColor="#000000"
+            android:layout_marginBottom="6dp"
+            android:text="Servicios Recomendados"
+            android:textColor="#FFB800"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/rvPostSpecialist"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvExpMenuName" />
-        
+            app:layout_constraintTop_toBottomOf="@+id/tvSpcMenuName"
+            app:layout_constraintVertical_bias="0.0" />
+
         <TextView
-            android:id="@+id/tvExpMenuName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Alexander Campos"
-            android:textColor="#ED254E"
+            android:id="@+id/tvSpcMenuName"
+            android:layout_width="156dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:textColor="#E35C6C"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvExpMenuWelcome" />
-        
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.072"
+            app:layout_constraintStart_toEndOf="@+id/tvSpcMenuWelcome"
+            app:layout_constraintTop_toBottomOf="@+id/tvSpcMenuTitle"
+            tools:text="Experto" />
+
         <TextView
-            android:id="@+id/tvExpMenuWelcome"
+            android:id="@+id/tvSpcMenuWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="Hola"
-            android:textColor="#ED254E"
+            android:textColor="#E35C6C"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvExpMenuTitle" />
-        
+            app:layout_constraintTop_toBottomOf="@+id/tvSpcMenuTitle" />
+
         <TextView
-            android:id="@+id/tvExpMenuTitle"
+            android:id="@+id/tvSpcMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="AlToque"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="AlToque!"
+            android:textColor="#FFB800"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        
+
         <TextView
-            android:id="@+id/tvExpMenu"
+            android:id="@+id/tvSpcMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:text="Menu"
-            android:textColor="#000000"
+            android:text="Herramientas"
+            android:textColor="#FFB800"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/llExpMyProfile"
+            app:layout_constraintBottom_toTopOf="@+id/llSpcMyAgenda"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvPostSpecialist" />
+
         <LinearLayout
-            android:id="@+id/llExpMyProfile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/llSpcMyAgenda"
+            android:layout_width="176dp"
+            android:layout_height="177dp"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
-            android:background="#E0E0E0"
+            android:layout_marginEnd="8dp"
+            android:background="#F3F8FA"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/llExpAgenda">
-            
+            app:layout_constraintStart_toEndOf="@+id/llSpcMyServicios"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.952">
+
             <ImageView
-                android:id="@+id/ivExpProfile"
+                android:id="@+id/ivSpcProfile"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:src="@android:drawable/ic_menu_gallery" />
-            
+                android:src="@drawable/baseline_class_24" />
+
             <TextView
-                android:id="@+id/tvExpMyProfile"
+                android:id="@+id/tvSpcMyAgenda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mi perfil"
+                android:text="Mi Agenda"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
-        
+
         <LinearLayout
-            android:id="@+id/llExpAgenda"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:id="@+id/llSpcMyServicios"
+            android:layout_width="171dp"
+            android:layout_height="178dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="16dp"
-            android:background="#E0E0E0"
+            android:background="#F3F8FA"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llExpMyProfile"
-            app:layout_constraintStart_toStartOf="parent">
-            
+            app:layout_constraintEnd_toStartOf="@+id/llSpcMyAgenda"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSpcMenu">
+
             <ImageView
-                android:id="@+id/ivExpAgenda"
+                android:id="@+id/ivSpcMyAgenda"
                 android:layout_width="match_parent"
                 android:layout_height="119dp"
-                android:src="@android:drawable/ic_menu_gallery" />
-            
+                android:src="@drawable/baseline_co_present_24" />
+
             <TextView
-                android:id="@+id/tvExpAgenda"
+                android:id="@+id/tvSpcServicios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Agenda"
+                android:text="Ver Servicos"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
-        
-        <ImageButton
-            android:id="@+id/ibExpNotifications"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="icono de notificaciones"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPostSpecialist"
+            android:layout_width="409dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvSpcMenu"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvServicesRecomendation" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="188dp"
+            android:layout_marginBottom="13dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvSpcMenuName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvSpcMenuTitle"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/stat_sys_headset" />
-    
+            app:srcCompat="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/btSpecialistNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="58dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvServicesRecomendation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_notifications_24" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

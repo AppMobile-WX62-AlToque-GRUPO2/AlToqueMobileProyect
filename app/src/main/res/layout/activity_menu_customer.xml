@@ -6,160 +6,154 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".IU.MenuCustomerActivity">
-    
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="#FFC107"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#FFFFFF"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCustMyPosts"
+
+        <TextView
+            android:id="@+id/textView10"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
-            android:background="#D6D6D6"
-            app:layout_constraintBottom_toTopOf="@+id/tvCustMenu"
+            android:layout_marginBottom="4dp"
+            android:text="Mis publicaciones"
+            android:textColor="#FFB800"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/rvPostCustomer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustPosts">
-        
-        </androidx.recyclerview.widget.RecyclerView>
-        
-        <TextView
-            android:id="@+id/tvCustPosts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="Mis publicaciones"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCustMenuName" />
-        
+
         <TextView
             android:id="@+id/tvCustMenuName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Rafael Urquiaga"
-            android:textColor="#ED254E"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="#E35C6C"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustMenuWelcome" />
-        
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvCustMenuWelcome"
+            app:layout_constraintTop_toBottomOf="@+id/tvCustMenuTitle"
+            tools:text="Cliente" />
+
         <TextView
             android:id="@+id/tvCustMenuWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:text="Hola"
-            android:textColor="#ED254E"
+            android:textColor="#E35C6C"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCustMenuTitle" />
-        
+
         <TextView
             android:id="@+id/tvCustMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="AlToque"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="AlToque!"
+            android:textColor="#FFB800"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        
+
         <TextView
             android:id="@+id/tvCustMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:text="Menu"
-            android:textColor="#000000"
+            android:text="Herramientas"
+            android:textColor="#FFB800"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/llCustMyProfile"
+            app:layout_constraintBottom_toTopOf="@+id/ivMyClientPosts"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvPostCustomer" />
+
         <LinearLayout
-            android:id="@+id/llCustMyProfile"
+            android:id="@+id/ivMyClientPosts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:background="#E0E0E0"
+            android:background="#F3F8FA"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/llCustCreatePosts">
-            
+
             <ImageView
                 android:id="@+id/ivCustProfile"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:src="@android:drawable/ic_menu_gallery" />
-            
+                android:src="@drawable/baseline_article_24" />
+
             <TextView
                 android:id="@+id/tvCustMyProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mi perfil"
+                android:text="Mis Publicaciones"
                 android:textAlignment="center"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/llCustCreatePosts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="17dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="16dp"
-            android:background="#E0E0E0"
+            android:background="#F3F8FA"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llCustMyProfile"
-            app:layout_constraintStart_toStartOf="parent">
-            
+            app:layout_constraintEnd_toStartOf="@+id/ivMyClientPosts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCustMenu">
+
             <ImageView
                 android:id="@+id/ivCustCreatePosts"
                 android:layout_width="match_parent"
                 android:layout_height="119dp"
-                android:src="@android:drawable/ic_menu_gallery" />
-            
+                android:src="@drawable/upload" />
+
             <TextView
                 android:id="@+id/tvCustCreatePosts"
                 android:layout_width="match_parent"
@@ -169,18 +163,49 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
-        
-        <ImageButton
-            android:id="@+id/ibCustNotifications"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="icono de notificaciones"
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="176dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvCustMenuTitle"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/stat_sys_headset" />
-    
+            app:srcCompat="@drawable/logo" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPostCustomer"
+            android:layout_width="412dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvCustMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <ImageView
+            android:id="@+id/ivClientNotification"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="152dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="52dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_notifications_24" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
