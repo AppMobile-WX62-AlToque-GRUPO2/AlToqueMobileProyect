@@ -1,14 +1,17 @@
 package com.example.altoque.IU
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +35,8 @@ class clientProfileActivity : AppCompatActivity() {
     // Variables globales para el permiso de la cámara y los IDs
     private val CAMERA_PERMISSION_CODE = 0
     private val IMAGE_PICK_CODE = 1
+
+    // IDs de cliente, usuario, ubicación y distrito
     private var clientId = 1
     private var userId = 1
     private var ubicationId = 1
@@ -54,6 +59,18 @@ class clientProfileActivity : AppCompatActivity() {
         setupRetrofit()
         loadInformation()
         setupView()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            // Cuando el usuario selecciona una imagen de la galería, obtén la URI de la imagen seleccionada
+            val imageUri: Uri? = data.data
+
+            val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
+            ivUser.setImageURI(imageUri)
+        }
     }
 
     // Configuración de Retrofit para las solicitudes de red
@@ -116,6 +133,12 @@ class clientProfileActivity : AppCompatActivity() {
             updateUserUbication()
             val updateUserRequest = createUpdateUserRequest()
             updateUserInfo(updateUserRequest)
+        }
+
+        // Regresar
+        val btBack = findViewById<Button>(R.id.btBack)
+        btBack.setOnClickListener {
+            finish()
         }
     }
 

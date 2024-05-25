@@ -1,6 +1,5 @@
 package com.example.altoque.networking
 
-import com.example.altoque.models.Client
 import com.example.altoque.models.Specialist
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -8,7 +7,6 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface SpecialistService {
-
     @GET("specialists/{id}")
     suspend fun getSpecialist(@Path("id") specialistId: Int): Specialist
 

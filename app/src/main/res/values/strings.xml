@@ -81,4 +81,12 @@
     <string name="rol">Rol</string>
     <string name="cliente">Cliente</string>
     <string name="correo">Correo</string>
+    <string name="perfil_de_especialista">Perfil de Especialista</string>
+    <string name="experiencia_laboral">Experiencia laboral</string>
+    <string name="a_os_meses">Años,Meses</string>
+    <string name="precio_de_consulta_s">Precio de consulta (S/.)</string>
+    <string name="precio">Precio</string>
+    <string name="experiencia_laboral_a_os">Experiencia laboral (Años)</string>
+    <string name="precio_de_consulta">Precio de consulta</string>
+    <string name="especialista">Especialista</string>
 </resources>

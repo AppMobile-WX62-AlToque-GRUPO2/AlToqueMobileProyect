@@ -55,13 +55,14 @@ class MenuExpertActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, SpecialistProfileActivity::class.java))
+                    startActivity(Intent(this, ShowSpecialistProfileActivity::class.java))
                     true
                 }
                 else -> false
             }
         }
 
+    
         val btSpecialistNotification = findViewById<ImageView>(R.id.btSpecialistNotification)
         btSpecialistNotification.setOnClickListener {
             startActivity(Intent(this, SpecialistNotification::class.java))
@@ -73,7 +74,7 @@ class MenuExpertActivity : AppCompatActivity() {
 
          GotoVerServicios()
          GotoMiAgenda()
-        
+       
     }
 
     private fun GotoVerServicios() {

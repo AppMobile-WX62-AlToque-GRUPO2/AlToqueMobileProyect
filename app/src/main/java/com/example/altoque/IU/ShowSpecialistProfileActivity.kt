@@ -12,34 +12,34 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.altoque.R
-import com.example.altoque.networking.ClientService
+import com.example.altoque.networking.ProfessionService
+import com.example.altoque.networking.SpecialistService
 import com.example.altoque.networking.UbicationService
 import com.example.altoque.networking.UserService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ShowClientProfileActivity : AppCompatActivity() {
+class ShowSpecialistProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         loadInformation()
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_show_client_profile)
+        setContentView(R.layout.activity_show_specialist_profile)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val btEditProfile = findViewById<TextView>(R.id.btEditProfileShowClientProfileActivity)
-        btEditProfile.setOnClickListener {
-            startActivity(Intent(this, clientProfileActivity::class.java))
+        val editProfile = findViewById<TextView>(R.id.btEditProfileShowSpecialistProfileActivity)
+        editProfile.setOnClickListener {
+            startActivity(Intent(this, SpecialistProfileActivity::class.java))
         }
 
-        val tvPhone = findViewById<TextView>(R.id.tvPhoneResponseShowClientActivity)
-
         // Llamar al número de teléfono
+        val tvPhone = findViewById<TextView>(R.id.tvPhoneResponseShowSpecialistActivity)
         tvPhone.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:" + tvPhone.text)
@@ -47,7 +47,7 @@ class ShowClientProfileActivity : AppCompatActivity() {
         }
 
         // Ir al correo
-        val tvEmail = findViewById<TextView>(R.id.tvEmailResponseShowClientActivity)
+        val tvEmail = findViewById<TextView>(R.id.tvEmailResponseShowSpecialistActivity)
         tvEmail.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse("mailto:" + tvEmail.text)
@@ -55,7 +55,7 @@ class ShowClientProfileActivity : AppCompatActivity() {
         }
 
         // Ir a la dirección
-        val tvAddress = findViewById<TextView>(R.id.tvAddressResponseShowClientActivity)
+        val tvAddress = findViewById<TextView>(R.id.tvAddressResponseShowSpecialistActivity)
         tvAddress.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("geo:0,0?q=" + tvAddress.text)
@@ -63,10 +63,11 @@ class ShowClientProfileActivity : AppCompatActivity() {
         }
 
         // Regresar
-        val btBack = findViewById<ImageButton>(R.id.btBackShowClientProfileActivity)
+        val btBack = findViewById<ImageButton>(R.id.btBackShowSpecialistProfileActivity)
         btBack.setOnClickListener {
             finish()
         }
+
     }
 
     private fun loadInformation() {
@@ -77,17 +78,22 @@ class ShowClientProfileActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val clientService = retrofit.create(ClientService::class.java)
+        val specialistService = retrofit.create(SpecialistService::class.java)
         val userService = retrofit.create(UserService::class.java)
         val ubicationService = retrofit.create(UbicationService::class.java)
+        val professionService = retrofit.create(ProfessionService::class.java)
 
         lifecycleScope.launch {
             try {
-                // Obtener información del cliente
-                val clientResponse = clientService.getClient(1)
+                // Obtener información del Specialist
+                val specialistResponse = specialistService.getSpecialist(1)
+
+                // Obtener información de la profesión del especialista
+                val professionId = specialistResponse.professionId
+                val professionResponse = professionService.getProfession(professionId)
 
                 // Obtener información del usuario utilizando userId del cliente
-                val userId = clientResponse.userId
+                val userId = specialistResponse.userId
                 val userResponse = userService.getUser(userId)
 
                 // Obtener información de la ubicación del usuario
@@ -96,12 +102,15 @@ class ShowClientProfileActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     // Actualizar los campos del UI con la información del usuario
-                    val tvName = findViewById<TextView>(R.id.tvNameShowClientActivtiy)
-                    val tvEmail = findViewById<TextView>(R.id.tvEmailResponseShowClientActivity)
-                    val tvPhone = findViewById<TextView>(R.id.tvPhoneResponseShowClientActivity)
-                    val tvBirthday = findViewById<TextView>(R.id.tvBirthdayResponseShowClientActivity)
-                    val tvDescription = findViewById<TextView>(R.id.tvDescriptionResponseShowClientActivity)
-                    val tvAddress = findViewById<TextView>(R.id.tvAddressResponseShowClientActivity)
+                    val tvName = findViewById<TextView>(R.id.tvNameShowSpecialistActivtiy)
+                    val tvEmail = findViewById<TextView>(R.id.tvEmailResponseShowSpecialistActivity)
+                    val tvPhone = findViewById<TextView>(R.id.tvPhoneResponseShowSpecialistActivity)
+                    val tvBirthday = findViewById<TextView>(R.id.tvBirthdayResponseShowSpecialistActivity)
+                    val tvDescription = findViewById<TextView>(R.id.tvDescriptionResponseShowSpecialistActivity)
+                    val tvAddress = findViewById<TextView>(R.id.tvAddressResponseShowSpecialistActivity)
+                    val tvWorkExperience = findViewById<TextView>(R.id.tvWorkExperienceResponseShowSpecialistActivity)
+                    val tvSpecialty = findViewById<TextView>(R.id.tvSpecialityShowSpecialistActivtiy)
+                    val tvPrice = findViewById<TextView>(R.id.tvPriceResponseShowSpecialistActivity)
 
                     tvName.setText(userResponse.firstName + " " + userResponse.lastName)
                     tvPhone.setText(userResponse.phone)
@@ -109,11 +118,16 @@ class ShowClientProfileActivity : AppCompatActivity() {
                     tvBirthday.setText(userResponse.birthdate)
                     tvDescription.setText(userResponse.description)
                     tvAddress.setText(ubicationResponse.address)
+                    // Se actualiza el campo de experiencia laboral y precio de consulta
+                    tvWorkExperience.setText(specialistResponse.workExperience.toString())
+                    tvPrice.setText(specialistResponse.consultationPrice.toString())
+                    // Se actualiza el campo de especialidad
+                    tvSpecialty.setText(professionResponse.name)
                 }
             } catch (e: Exception) {
                 // Maneja errores
                 runOnUiThread {
-                    Toast.makeText(this@ShowClientProfileActivity, "Error al cargar la información", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ShowSpecialistProfileActivity, "Error al cargar la información", Toast.LENGTH_SHORT).show()
                 }
             }
         }
