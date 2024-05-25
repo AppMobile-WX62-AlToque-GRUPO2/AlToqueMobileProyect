@@ -44,7 +44,7 @@ class MenuExpertActivity : AppCompatActivity() {
         val llExpMyProfile = findViewById<LinearLayout>(R.id.llExpMyProfile)
         
         llExpMyProfile.setOnClickListener {
-            startActivity(Intent(this, SpecialistProfileActivity::class.java))
+            startActivity(Intent(this, ShowSpecialistProfileActivity::class.java))
         }
     }
     
