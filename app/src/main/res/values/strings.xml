@@ -62,4 +62,23 @@
     <string name="lima_san_isidro">Lima, San Isidro</string>
     <string name="hace_20_min_16_04_2024">Hace 20 min - 16/04/2024</string>
     <string name="btSpcMenuProfile">Ver perfil de especialista</string>
+    <string name="logout">Logout</string>
+    <string name="nombre_y_apellido">Nombre y Apellido</string>
+    <string name="email">Email</string>
+    <string name="correo_electr_nico">correo electrónico</string>
+    <string name="tel_fono_51">Teléfono (+51)</string>
+    <string name="_999999999">999999999</string>
+    <string name="perfil_de_cliente">Perfil de Cliente</string>
+    <string name="a_o_mes_d_a">año/mes/día</string>
+    <string name="direcci_n">Dirección</string>
+    <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="edici_n_de_perfil">Edición de Perfil</string>
+    <string name="primer_apellido">Primer apellido</string>
+    <string name="n_mero_celular_51">Número celular (+51)</string>
+    <string name="a_o_mes_dia">año-mes-dia</string>
+    <string name="guardar">Guardar</string>
+    <string name="rol">Rol</string>
+    <string name="cliente">Cliente</string>
+    <string name="correo">Correo</string>
 </resources>

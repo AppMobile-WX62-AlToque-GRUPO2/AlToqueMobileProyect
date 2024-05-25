@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".IU.ShowClientProfileActivity">
+
+    <ImageView
+        android:id="@+id/ivUserShowClientActivity"
+        android:layout_width="182dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/rounded_border_background"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewShowClientActivtiy"
+        app:srcCompat="@drawable/clientprofile"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/btBackShowClientProfileActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/keyboard_arrow_left"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/tvClientProfileShowClientProfileActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/perfil_de_cliente"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/btBackShowClientProfileActivity"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btLogoutShowClientActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFD94D"
+        android:text="@string/logout"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        app:icon="@drawable/logout"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+    <View
+        android:id="@+id/viewShowClientActivtiy"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="#FFD94D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btLogoutShowClientActivity" />
+
+    <TextView
+        android:id="@+id/tvNameShowClientActivtiy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="100dp"
+        android:text="@string/nombre_y_apellido"
+        android:textColor="#E35C6C"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivUserShowClientActivity" />
+
+    <TextView
+        android:id="@+id/tvEmailShowClientActivtiy"
+        android:layout_width="95dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/email"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarShowClientActivity"
+        tools:ignore="TextSizeCheck" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2ShowClientActivtiy"
+        app:srcCompat="@drawable/phone"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvEmailResponseShowClientActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/correo_electr_nico"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvEmailShowClientActivtiy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvEmailShowClientActivtiy" />
+
+    <TextView
+        android:id="@+id/tvPhoneShowClientActivtiy"
+        android:layout_width="95dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tel_fono_51"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/view2ShowClientActivtiy"
+        tools:ignore="TextSizeCheck" />
+
+    <View
+        android:id="@+id/view2ShowClientActivtiy"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:background="#CFCFCF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarShowClientActivity"
+        app:srcCompat="@drawable/email"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvPhoneResponseShowClientActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/_999999999"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvPhoneShowClientActivtiy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvPhoneShowClientActivtiy" />
+
+    <RatingBar
+        android:id="@+id/ratingBarShowClientActivity"
+        android:layout_width="241dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:numStars="5"
+        android:progressTint="#FFB800"
+        android:rating="1"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:isIndicator="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameShowClientActivtiy" />
+
+    <View
+        android:id="@+id/view3ShowClientActivity"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:background="#CFCFCF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3ShowClientActivity"
+        app:srcCompat="@drawable/calendar"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvBirthdayShowClientActivtiy"
+        android:layout_width="95dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fecha_de_nacimiento"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/view3ShowClientActivity"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/tvBirthdayResponseShowClientActivity"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/a_o_mes_d_a"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvBirthdayShowClientActivtiy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvBirthdayShowClientActivtiy" />
+
+    <View
+        android:id="@+id/view4ShowClientActivity"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:background="#CFCFCF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4ShowClientActivity"
+        app:srcCompat="@drawable/baseline_map_24"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvAddressShowClientActivtiy"
+        android:layout_width="95dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/direcci_n"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/view4ShowClientActivity"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/tvAddressResponseShowClientActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:justificationMode="inter_word"
+        android:text="@string/direcci_n"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvAddressShowClientActivtiy"
+        app:layout_constraintTop_toBottomOf="@+id/view4ShowClientActivity" />
+
+    <View
+        android:id="@+id/view5ShowClientActivity"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:background="#CFCFCF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddressResponseShowClientActivity" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view5ShowClientActivity"
+        app:srcCompat="@drawable/description"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvDescriptionShowClientActivtiy"
+        android:layout_width="95dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/descripci_n"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toBottomOf="@+id/view5ShowClientActivity"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/tvDescriptionResponseShowClientActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:justificationMode="inter_word"
+        android:text="@string/descripci_n"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvDescriptionShowClientActivtiy"
+        app:layout_constraintTop_toBottomOf="@+id/view5ShowClientActivity" />
+
+    <Button
+        android:id="@+id/btEditProfileShowClientProfileActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#FFD94D"
+        android:text="@string/editar_perfil"
+        android:textColor="@color/white"
+        app:icon="@drawable/baseline_edit_24"
+        app:iconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionResponseShowClientActivity"
+        tools:ignore="TextContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/ivUser"
+        app:layout_constraintStart_toEndOf="@+id/ivUserShowClientActivity"
         app:layout_constraintTop_toBottomOf="@+id/btBack" />
 
     <TextView
@@ -126,7 +126,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvName" />
 
     <ImageView
-        android:id="@+id/ivUser"
+        android:id="@+id/ivUserShowClientActivity"
         android:layout_width="126dp"
         android:layout_height="81dp"
         android:layout_marginStart="50dp"
@@ -150,8 +150,8 @@
         android:background="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivUser"
-        app:layout_constraintTop_toBottomOf="@+id/ivUser"
+        app:layout_constraintStart_toEndOf="@+id/ivUserShowClientActivity"
+        app:layout_constraintTop_toBottomOf="@+id/ivUserShowClientActivity"
         app:srcCompat="@drawable/iconcamera" />
 
     <TextView
