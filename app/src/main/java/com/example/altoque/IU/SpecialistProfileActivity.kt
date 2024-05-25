@@ -49,7 +49,7 @@ class SpecialistProfileActivity : AppCompatActivity() {
             // Cuando el usuario selecciona una imagen de la galería, obtén la URI de la imagen seleccionada
             val imageUri: Uri? = data.data
 
-            val ivUser = findViewById<ImageView>(R.id.ivUser)
+            val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
             ivUser.setImageURI(imageUri)
         }
     }

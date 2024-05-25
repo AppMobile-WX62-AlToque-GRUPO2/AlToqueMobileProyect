@@ -5,10 +5,11 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permiso para abrir enlaces externos -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,6 +21,9 @@
         android:theme="@style/Theme.Altoque"
         tools:targetApi="31">
 
+        <activity
+            android:name=".IU.ShowClientProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".IU.MenuExpertActivity"
             android:exported="false" />

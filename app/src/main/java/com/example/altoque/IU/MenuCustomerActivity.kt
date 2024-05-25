@@ -44,7 +44,7 @@ class MenuCustomerActivity : AppCompatActivity() {
         val llMyProfile = findViewById<LinearLayout>(R.id.llCustMyProfile)
         
         llMyProfile.setOnClickListener {
-            startActivity(Intent(this, clientProfileActivity::class.java))
+            startActivity(Intent(this, ShowClientProfileActivity::class.java))
         }
     }
     
