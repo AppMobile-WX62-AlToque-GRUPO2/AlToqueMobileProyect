@@ -8,21 +8,23 @@
     tools:context=".IU.MenuExpertActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="#FFC107"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:menu="@menu/bottom_nav_menu" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#FFFFFF"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,8 +33,8 @@
             android:id="@+id/tvServicesRecomendation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="6dp"
             android:text="Servicios Recomendados"
@@ -50,8 +52,8 @@
             android:id="@+id/tvSpcMenuName"
             android:layout_width="156dp"
             android:layout_height="26dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
             android:textColor="#E35C6C"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -59,14 +61,14 @@
             app:layout_constraintHorizontal_bias="0.072"
             app:layout_constraintStart_toEndOf="@+id/tvSpcMenuWelcome"
             app:layout_constraintTop_toBottomOf="@+id/tvSpcMenuTitle"
-            tools:text="Nombre" />
+            tools:text="Experto" />
 
         <TextView
             android:id="@+id/tvSpcMenuWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="Hola"
             android:textColor="#E35C6C"
             android:textSize="20sp"
@@ -78,8 +80,8 @@
             android:id="@+id/tvSpcMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="AlToque!"
             android:textColor="#FFB800"
             android:textSize="34sp"
@@ -91,7 +93,7 @@
             android:id="@+id/tvSpcMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
@@ -99,24 +101,25 @@
             android:textColor="#FFB800"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/llSpcMyProfile"
+            app:layout_constraintBottom_toTopOf="@+id/llSpcMyAgenda"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvPostSpecialist" />
 
         <LinearLayout
-            android:id="@+id/llSpcMyProfile"
+            android:id="@+id/llSpcMyAgenda"
             android:layout_width="176dp"
             android:layout_height="177dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:background="#E5F2F8"
+            android:background="#F3F8FA"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/llSpcMyAgenda">
+            app:layout_constraintStart_toEndOf="@+id/llSpcMyServicios"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.952">
 
             <ImageView
                 android:id="@+id/ivSpcProfile"
@@ -135,18 +138,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llSpcMyAgenda"
+            android:id="@+id/llSpcMyServicios"
             android:layout_width="171dp"
             android:layout_height="178dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="16dp"
-            android:background="#E5F2F8"
+            android:background="#F3F8FA"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llSpcMyProfile"
+            app:layout_constraintEnd_toStartOf="@+id/llSpcMyAgenda"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSpcMenu">
 
@@ -169,7 +172,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPostSpecialist"
             android:layout_width="409dp"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="6dp"
             app:layout_constraintBottom_toTopOf="@+id/tvSpcMenu"
@@ -179,19 +182,31 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="67dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="134dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvServicesRecomendation"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="188dp"
+            android:layout_marginBottom="13dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvSpcMenuName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvSpcMenuTitle"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/btSpecialistNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="58dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvServicesRecomendation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_notifications_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
