@@ -12,7 +12,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,13 +19,36 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.altoque.R
+import com.example.altoque.models.Specialist
+import com.example.altoque.models.Ubication
+import com.example.altoque.models.UpdateUserRequest
+import com.example.altoque.networking.ProfessionService
+import com.example.altoque.networking.SpecialistService
+import com.example.altoque.networking.UbicationService
+import com.example.altoque.networking.UserService
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SpecialistProfileActivity : AppCompatActivity() {
 
     //Variable global para el permiso de la cámara
     private val CAMERA_PERMISSION_CODE = 0
     private val IMAGE_PICK_CODE = 1
+
+    // IDs de cliente, usuario, ubicación y distrito
+    private var specialistId = 1
+    private var userId = 1
+    private var ubicationId = 1
+    private var professionId = 1
+    private var districtId = 2
+
+    private lateinit var specialistService: SpecialistService
+    private lateinit var userService: UserService
+    private lateinit var ubicationService: UbicationService
+    private lateinit var professionService: ProfessionService
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +61,8 @@ class SpecialistProfileActivity : AppCompatActivity() {
             insets
         }
 
+        setupRetrofit()
+        loadInformation()
         setupView()
     }
 
@@ -54,99 +78,220 @@ class SpecialistProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupView() {
-        val btBack = findViewById<Button>(R.id.btBack)
-        val tvName = findViewById<TextView>(R.id.tvName)
-        val etName = findViewById<EditText>(R.id.etName)
-        val tvLastname = findViewById<TextView>(R.id.tvLastname)
-        val etLastname = findViewById<EditText>(R.id.etLastname)
-        val tvPhone = findViewById<TextView>(R.id.tvPhone)
-        val etPhone = findViewById<EditText>(R.id.etPhone)
-        val tvBirthday = findViewById<TextView>(R.id.tvBirthday)
-        val etBirthday = findViewById<EditText>(R.id.etBirthday)
-        val tvDescription = findViewById<TextView>(R.id.tvDescription)
-        val etDescription = findViewById<EditText>(R.id.etDescription)
+    // Configuración de Retrofit para las solicitudes de red
+    private fun setupRetrofit() {
+        val urlBase = "https://altoquebackendapi.onrender.com/"
+        val retrofit = Retrofit.Builder()
+            .baseUrl(urlBase)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        specialistService = retrofit.create(SpecialistService::class.java)
+        userService = retrofit.create(UserService::class.java)
+        ubicationService = retrofit.create(UbicationService::class.java)
+        professionService = retrofit.create(ProfessionService::class.java)
+    }
 
-        val tvPrice = findViewById<TextView>(R.id.tvPrice)
-        val etPrice = findViewById<EditText>(R.id.etPrice)
+    // Carga de la información del especialista, usuario, ubicación y especialidad
+    private fun loadInformation() {
+        lifecycleScope.launch {
+            try {
+                val clientResponse = specialistService.getSpecialist(specialistId)
+                userId = clientResponse.userId
+                val userResponse = userService.getUser(userId)
+
+                ubicationId = userResponse.ubicationId
+                val ubicationResponse = ubicationService.getUbication(ubicationId)
+
+                professionId = clientResponse.professionId
+                val professionResponse = professionService.getProfession(professionId)
+                runOnUiThread {
+                    // Actualizar la UI con la información cargada
+                    val etName = findViewById<EditText>(R.id.etName)
+                    val etLastname = findViewById<EditText>(R.id.etLastname)
+                    val etPhone = findViewById<EditText>(R.id.etPhone)
+                    val etBirthday = findViewById<EditText>(R.id.etBirthday)
+                    val etDescription = findViewById<EditText>(R.id.etDescription)
+                    val etAddress = findViewById<EditText>(R.id.etAddress)
+                    val etEmail = findViewById<EditText>(R.id.etEmailAddress)
+                    val etPrice = findViewById<EditText>(R.id.etPrice)
+                    val etWorkExperience = findViewById<EditText>(R.id.etWorkExperience)
 
 
-        val btSave = findViewById<Button>(R.id.btSave)
-        val ibCamera = findViewById<ImageButton>(R.id.ibCamera)
-
-        ibCamera.setOnClickListener {
-            //Verifico si tengo permiso
-            checkCameraPermission()
-        }
-
-        btSave.setOnClickListener {
-            val name = etName.text.toString().trim()
-            val lastName = etLastname.text.toString().trim()
-            val phone = etPhone.text.toString().trim()
-            val birthday = etBirthday.text.toString().trim()
-            val description = etDescription.text.toString().trim()
-            val price = etPrice.text.toString().trim()
-
-            if (name.isNotEmpty() && lastName.isNotEmpty() && phone.isNotEmpty() && phone.length == 9 && birthday.isNotEmpty() && description.isNotEmpty() && price.isNotEmpty()) {
-                // Si todos los datos están ingresados, mostrar confirmación
-                showConfirmationDialog()
-            } else {
-                // Si algunos datos faltan, mostrar un mensaje de error
-                Toast.makeText(this, "Por favor, ingrese todos los datos solicitados", Toast.LENGTH_SHORT).show()
+                    etName.setText(userResponse.firstName)
+                    etLastname.setText(userResponse.lastName)
+                    etPhone.setText(userResponse.phone)
+                    etBirthday.setText(userResponse.birthdate)
+                    etDescription.setText(userResponse.description)
+                    etAddress.setText(ubicationResponse.address)
+                    etEmail.setText(userResponse.email)
+                    districtId = ubicationResponse.districtId
+                    etPrice.setText(clientResponse.consultationPrice.toString())
+                    etWorkExperience.setText(clientResponse.workExperience.toString())
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    // Manejar errores de carga de información
+                    Toast.makeText(this@SpecialistProfileActivity, "Error al cargar la información", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 
-    //METODO QUE MUESTRA UN DIALOGO DE CONFIRMACION
+    // Configuración de la vista y manejo de eventos
+    private fun setupView() {
+        val ibCamera = findViewById<ImageButton>(R.id.ibCamera)
+        ibCamera.setOnClickListener {
+            checkCameraPermission()
+        }
+        val btSave = findViewById<Button>(R.id.btSave)
+        btSave.setOnClickListener {
+            updateUserUbication()
+            val updateUserRequest = createUpdateUserRequest()
+            updateUserInfo(updateUserRequest)
+            val updateSpecialistRequest = createUpdateSpecialistRequest()
+            updateSpecialistInfo(updateSpecialistRequest)
+        }
+
+        val btBack = findViewById<Button>(R.id.btBack)
+        btBack.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun createUpdateSpecialistRequest(): Specialist {
+        val etPrice = findViewById<EditText>(R.id.etPrice)
+        val etWorkExperience = findViewById<EditText>(R.id.etWorkExperience)
+
+        // Convertir los valores de texto a Float
+        val price = etPrice.text.toString().toFloatOrNull() ?: 0f
+        val workExperience = etWorkExperience.text.toString().toFloatOrNull() ?: 0f
+
+        return Specialist(
+            id = specialistId,
+            userId = userId,
+            professionId = professionId,
+            consultationPrice = price,
+            workExperience = workExperience
+        )
+    }
+
+    private fun updateSpecialistInfo(specialist: Specialist) {
+        lifecycleScope.launch {
+            try {
+                specialistService.updateSpecialist(specialistId, specialist)
+            } catch (e: Exception) {
+                runOnUiThread {
+                    // Manejar errores de actualización de información del especialista
+                    Toast.makeText(this@SpecialistProfileActivity, "Error al actualizar la información del especialista", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    // Creación de objeto UpdateUserRequest con los datos de la vista
+    private fun createUpdateUserRequest(): UpdateUserRequest {
+        val etName = findViewById<EditText>(R.id.etName)
+        val etLastname = findViewById<EditText>(R.id.etLastname)
+        val etPhone = findViewById<EditText>(R.id.etPhone)
+        val etBirthday = findViewById<EditText>(R.id.etBirthday)
+        val etDescription = findViewById<EditText>(R.id.etDescription)
+        val etEmail = findViewById<EditText>(R.id.etEmailAddress)
+        return UpdateUserRequest(
+            email = etEmail.text.toString(),
+            role = false,
+            firstName = etName.text.toString(),
+            lastName = etLastname.text.toString(),
+            phone = etPhone.text.toString(),
+            birthdate = etBirthday.text.toString(),
+            avatar = null, // No estamos actualizando el avatar aquí
+            description = etDescription.text.toString(),
+            ubicationId = ubicationId
+        )
+    }
+
+    // Actualización de la ubicación del usuario en el servidor
+    private fun updateUserUbication() {
+        val etAddress = findViewById<EditText>(R.id.etAddress)
+        val address = etAddress.text.toString()
+        lifecycleScope.launch {
+            try {
+                ubicationService.updateUbication(ubicationId, Ubication(ubicationId, address, districtId))
+            } catch (e: Exception) {
+                runOnUiThread {
+                    // Manejar errores de actualización de ubicación
+                    Toast.makeText(this@SpecialistProfileActivity, "Error al actualizar la ubicación", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    // Actualización de la información del usuario en el servidor
+    private fun updateUserInfo(updateUserRequest: UpdateUserRequest) {
+        lifecycleScope.launch {
+            try {
+                userService.updateUser(userId, updateUserRequest)
+                runOnUiThread {
+                    // Mostrar diálogo de confirmación después de la actualización exitosa
+                    showConfirmationDialog()
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    // Manejar errores de actualización de información del usuario
+                    Toast.makeText(this@SpecialistProfileActivity, "Error al actualizar la información", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    // Mostrar un diálogo de confirmación después de la actualización exitosa
     private fun showConfirmationDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Confirmación")
         builder.setMessage("Se guardaron los cambios con éxito.")
         builder.setPositiveButton("OK") { dialog, _ ->
             dialog.dismiss()
+            // Regresar al perfil del cliente después de la confirmación
+            val intent = Intent(this, ShowSpecialistProfileActivity::class.java)
+            startActivity(intent)
         }
         builder.show()
     }
 
+    // Verificar el permiso de la cámara y solicitarlo si es necesario
     private fun checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED){
-            //Si no tengo permiso, solicito permiso
             requestCameraPermission()
-        }
-        else{
+        } else {
             Toast.makeText(this, "Tienes permisos para usar la cámara", Toast.LENGTH_SHORT).show()
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, IMAGE_PICK_CODE)
         }
     }
 
-    //METODO PARA SOLICITAR PERMISO
+    // Solicitar permiso de la cámara al usuario
     private fun requestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
-            //Si el usuario ha rechazado el permiso antes, ingrese manualmente
+            // Explicar al usuario por qué se necesita el permiso
             Toast.makeText(this, "Ya se rechazó el permiso antes, habilítelo manualmente", Toast.LENGTH_SHORT).show()
-        }
-        else{
-            //Si el usuario no hay rechazado el permiso antes, solicito permiso
+        } else {
+            // Solicitar el permiso al usuario
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
         }
     }
 
-    //METODO QUE ESCUCHA RESPUESTA SI EL USUARIO ACEPTA O RECHAZA LA SOLICITUD DE PERMISO
+    // Manejar la respuesta del usuario a la solicitud de permiso
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
         when(requestCode){
             CAMERA_PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     //Si el usuario acepta el permiso
                     Toast.makeText(this, "Permiso concedido", Toast.LENGTH_SHORT).show()
-                    //Acá se pondría toda la lógica
                 }
                 else{
                     //Si el usuario rechaza el permiso

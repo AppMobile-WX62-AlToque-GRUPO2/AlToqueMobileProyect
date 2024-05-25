@@ -1,6 +1,9 @@
 package com.example.altoque.IU
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ShowSpecialistProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         loadInformation()
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_show_specialist_profile)
@@ -28,6 +32,42 @@ class ShowSpecialistProfileActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val editProfile = findViewById<TextView>(R.id.btEditProfileShowSpecialistProfileActivity)
+        editProfile.setOnClickListener {
+            startActivity(Intent(this, SpecialistProfileActivity::class.java))
+        }
+
+        // Llamar al número de teléfono
+        val tvPhone = findViewById<TextView>(R.id.tvPhoneResponseShowSpecialistActivity)
+        tvPhone.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:" + tvPhone.text)
+            startActivity(intent)
+        }
+
+        // Ir al correo
+        val tvEmail = findViewById<TextView>(R.id.tvEmailResponseShowSpecialistActivity)
+        tvEmail.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data = Uri.parse("mailto:" + tvEmail.text)
+            startActivity(intent)
+        }
+
+        // Ir a la dirección
+        val tvAddress = findViewById<TextView>(R.id.tvAddressResponseShowSpecialistActivity)
+        tvAddress.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("geo:0,0?q=" + tvAddress.text)
+            startActivity(intent)
+        }
+
+        // Regresar
+        val btBack = findViewById<ImageButton>(R.id.btBackShowSpecialistProfileActivity)
+        btBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun loadInformation() {

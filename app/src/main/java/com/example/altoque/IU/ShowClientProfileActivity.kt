@@ -3,6 +3,7 @@ package com.example.altoque.IU
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -59,6 +60,12 @@ class ShowClientProfileActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("geo:0,0?q=" + tvAddress.text)
             startActivity(intent)
+        }
+
+        // Regresar
+        val btBack = findViewById<ImageButton>(R.id.btBackShowClientProfileActivity)
+        btBack.setOnClickListener {
+            finish()
         }
     }
 
