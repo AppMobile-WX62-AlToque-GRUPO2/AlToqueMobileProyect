@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.altoque.R
 import com.example.altoque.networking.ClientService
 import com.example.altoque.networking.UbicationService
@@ -20,6 +22,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ShowClientProfileActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         loadInformation()
 
@@ -65,7 +68,8 @@ class ShowClientProfileActivity : AppCompatActivity() {
         // Regresar
         val btBack = findViewById<ImageButton>(R.id.btBackShowClientProfileActivity)
         btBack.setOnClickListener {
-            finish()
+            val intent = Intent(this, MenuCustomerActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -102,6 +106,7 @@ class ShowClientProfileActivity : AppCompatActivity() {
                     val tvBirthday = findViewById<TextView>(R.id.tvBirthdayResponseShowClientActivity)
                     val tvDescription = findViewById<TextView>(R.id.tvDescriptionResponseShowClientActivity)
                     val tvAddress = findViewById<TextView>(R.id.tvAddressResponseShowClientActivity)
+                    val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
 
                     tvName.setText(userResponse.firstName + " " + userResponse.lastName)
                     tvPhone.setText(userResponse.phone)
@@ -109,6 +114,17 @@ class ShowClientProfileActivity : AppCompatActivity() {
                     tvBirthday.setText(userResponse.birthdate)
                     tvDescription.setText(userResponse.description)
                     tvAddress.setText(ubicationResponse.address)
+
+                    // Cargar la imagen del usuario desde la URL de la API utilizando Glide
+                    if (userResponse.avatar != null) {
+                        Glide.with(this@ShowClientProfileActivity)
+                            .load(userResponse.avatar)
+                            .placeholder(R.drawable.default_user)
+                            .into(ivUser)
+                    } else {
+                        //Si no hay imagen se le da una imagen default
+                        ivUser.setImageResource(R.drawable.default_user)
+                    }
                 }
             } catch (e: Exception) {
                 // Maneja errores

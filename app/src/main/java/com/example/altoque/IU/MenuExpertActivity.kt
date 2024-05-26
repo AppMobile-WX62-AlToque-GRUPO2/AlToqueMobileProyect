@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.altoque.R
 import com.example.altoque.adapter.PostAdapter
 import com.example.altoque.models.Post
-import com.example.altoque.networking.ClientService
 import com.example.altoque.networking.PostService
 import com.example.altoque.networking.SpecialistService
 import com.example.altoque.networking.UserService
@@ -124,7 +123,7 @@ class MenuExpertActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                val specialistResponse = specialistService.getSpecialist(2)
+                val specialistResponse = specialistService.getSpecialist(1)
 
                 val userId = specialistResponse.userId
                 val userResponse = userService.getUser(userId)

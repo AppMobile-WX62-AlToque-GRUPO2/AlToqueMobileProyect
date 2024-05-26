@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.altoque.R
 import com.example.altoque.networking.ProfessionService
 import com.example.altoque.networking.SpecialistService
@@ -65,7 +67,9 @@ class ShowSpecialistProfileActivity : AppCompatActivity() {
         // Regresar
         val btBack = findViewById<ImageButton>(R.id.btBackShowSpecialistProfileActivity)
         btBack.setOnClickListener {
-            finish()
+            //finish()
+            val intent = Intent(this, MenuExpertActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -111,6 +115,7 @@ class ShowSpecialistProfileActivity : AppCompatActivity() {
                     val tvWorkExperience = findViewById<TextView>(R.id.tvWorkExperienceResponseShowSpecialistActivity)
                     val tvSpecialty = findViewById<TextView>(R.id.tvSpecialityShowSpecialistActivtiy)
                     val tvPrice = findViewById<TextView>(R.id.tvPriceResponseShowSpecialistActivity)
+                    val ivUser = findViewById<ImageView>(R.id.ivUserShowSpecialistActivity)
 
                     tvName.setText(userResponse.firstName + " " + userResponse.lastName)
                     tvPhone.setText(userResponse.phone)
@@ -123,6 +128,17 @@ class ShowSpecialistProfileActivity : AppCompatActivity() {
                     tvPrice.setText(specialistResponse.consultationPrice.toString())
                     // Se actualiza el campo de especialidad
                     tvSpecialty.setText(professionResponse.name)
+
+                    // Cargar la imagen del usuario desde la URL de la API utilizando Glide
+                    if (userResponse.avatar != null) {
+                        Glide.with(this@ShowSpecialistProfileActivity)
+                            .load(userResponse.avatar)
+                            .placeholder(R.drawable.default_user)
+                            .into(ivUser)
+                    } else {
+                        //Si no hay imagen se le da una imagen default
+                        ivUser.setImageResource(R.drawable.default_user)
+                    }
                 }
             } catch (e: Exception) {
                 // Maneja errores
