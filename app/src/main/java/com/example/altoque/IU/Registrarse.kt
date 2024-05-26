@@ -11,6 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.altoque.R
+import com.example.altoque.models.Login
+import com.example.altoque.models.Register
+import com.example.altoque.networking.AltoqueService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class Registrarse : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,62 +30,79 @@ class Registrarse : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val etCorreo = findViewById<EditText>(R.id.etCorreo)
-        val etContra = findViewById<EditText>(R.id.etContra)
-        val etRepiteContra = findViewById<EditText>(R.id.etRepiteContra)
-
         val btRegistrarme = findViewById<Button>(R.id.btRegistrarme)
         val btCliente = findViewById<Button>(R.id.btCliente)
         val btEspecialista = findViewById<Button>(R.id.btEspecialista)
 
         val tvIniciarSesion = findViewById<TextView>(R.id.tvIniciarSesion)
-        var rol = "NOHAYROL"
+        var rol: Boolean? = null
 
         btRegistrarme.setOnClickListener {
-            val email = etCorreo.text.toString()
-            val contra = etContra.text.toString()
-            val repiteContra = etRepiteContra.text.toString()
-
-            if (isValidEmail(email)) {
-                if (contra == repiteContra) {
-                    when (rol) {
-                        "ESPECIALISTA" -> {
-                            //COLOCAR EL NOMBRE DEL ACTIVITY
-                            //val intent = Intent(this, HomeEspecialista::class.java)
-                            startActivity(intent)
-                        }
-                        "CLIENTE" -> {
-                            //COLOCAR EL NOMBRE DEL ACTIVITY
-                            //val intent = Intent(this, HomeCliente::class.java)
-                            startActivity(intent)
-                        }
-                        else -> {
-                            Toast.makeText(this, "Agrega un rol", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                } else {
-                    Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show()
-                }
-            } else {
-                Toast.makeText(this, "Usuario no Válido", Toast.LENGTH_LONG).show()
-            }
+            registro(rol)
         }
 
         tvIniciarSesion.setOnClickListener{
-            val intent = Intent(this, IniciarSesion::class.java)
-            startActivity(intent)
+            iniciarsesion()
         }
 
-        btCliente.setOnClickListener{
-            rol = "CLIENTE"
-        }
-        btEspecialista.setOnClickListener{
-            rol = "ESPECIALISTA"
-        }
+        btCliente.setOnClickListener{rol = true }
+        btEspecialista.setOnClickListener{rol = false }
 
     }
 
-    fun isValidEmail(email: String): Boolean {
-        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    private fun registro(rol: Boolean?) {
+
+        val etEmail = findViewById<EditText>(R.id.etCorreo)
+        val email = etEmail.text.toString()
+
+        val etPassword = findViewById<EditText>(R.id.etContra)
+        val password = etPassword.text.toString()
+
+        val etRepeatPassword = findViewById<EditText>(R.id.etRepiteContra)
+        val repeatPassword = etRepeatPassword.text.toString()
+
+        // Validación de entradas vacías
+        if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty() || rol == null) {
+            Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Validación de contraseñas coincidentes
+        if (password != repeatPassword) {
+            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Creamos instancia de retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://altoquebackendapi.onrender.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val userService = retrofit.create(AltoqueService::class.java)
+        val registerRequest = Register(email, password, rol,
+            "","","","","", "",0,0)
+        val userRequest = userService.postRegister(registerRequest)
+
+
+        userRequest.enqueue(object : Callback<Register> {
+            override fun onResponse(p0: Call<Register>, response: Response<Register>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@Registrarse, "Se creo el usuario correctamente", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    Toast.makeText(this@Registrarse, "Error al obtener usuarios", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Register>, t: Throwable) {
+                Toast.makeText(this@Registrarse, "Error de red: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun iniciarsesion() {
+        val intent = Intent(this, IniciarSesion::class.java)
+        startActivity(intent)
     }
 }
