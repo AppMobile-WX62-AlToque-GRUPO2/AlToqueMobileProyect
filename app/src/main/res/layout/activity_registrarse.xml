@@ -68,7 +68,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="176dp"
-        android:backgroundTint="#43E14B"
+        android:backgroundTint="#FFB800"
         android:text="REGISTRARME"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,27 +81,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#FFB016"
         android:text="ESPECIALISTA"
         app:layout_constraintBottom_toTopOf="@+id/tvCorreo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintVertical_bias="0.166" />
 
     <Button
         android:id="@+id/btCliente"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="40dp"
-        android:backgroundTint="#8BC34A"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFD94D"
         android:text="CLIENTE"
         app:layout_constraintBottom_toTopOf="@+id/tvCorreo"
         app:layout_constraintEnd_toStartOf="@+id/btEspecialista"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.187" />
 
     <TextView
         android:id="@+id/tvTitulo"

@@ -8,11 +8,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.altoque.R
+import com.example.altoque.models.Login
+import com.example.altoque.networking.AltoqueService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class IniciarSesion : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,52 +31,81 @@ class IniciarSesion : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val etCorreo = findViewById<EditText>(R.id.etCorreo)
-        val etContra = findViewById<EditText>(R.id.etContra)
+
         val btIniciarSesion = findViewById<Button>(R.id.btRegistrarme)
         val btCliente = findViewById<Button>(R.id.btCliente)
         val btEspecialista = findViewById<Button>(R.id.btEspecialista)
+
         val tvRegistrate = findViewById<TextView>(R.id.tvRegistrate)
-        var rol = "NOHAYROL"
+
+        var rol: Boolean? = null
 
         btIniciarSesion.setOnClickListener {
-            val email = etCorreo.text.toString()
-            val contra = etContra.text.toString()
-
-            if (isValidEmail(email)) {
-                when (rol) {
-                    "ESPECIALISTA" -> {
-                        //COLOCAR EL NOMBRE DEL ACTIVITY
-                        val intent = Intent(this, MenuExpertActivity::class.java)
-                        startActivity(intent)
-                    }
-                    "CLIENTE" -> {
-                        //COLOCAR EL NOMBRE DEL ACTIVITY
-                        val intent = Intent(this, MenuCustomerActivity::class.java)
-                        startActivity(intent)
-                    }
-                    else -> {
-                        Toast.makeText(this, "Agrega un rol", Toast.LENGTH_LONG).show()
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Usuario no Valido", Toast.LENGTH_LONG).show()
-            }
+            validacion_iniciarSesion(rol)
         }
 
         tvRegistrate.setOnClickListener{
-            val intent = Intent(this, Registrarse::class.java)
-            startActivity(intent)
+            registrarse()
+        }
+        btCliente.setOnClickListener{ rol = true }
+        btEspecialista.setOnClickListener{ rol = false }
+    }
+
+    private fun registrarse() {
+        val intent = Intent(this, Registrarse::class.java)
+        startActivity(intent)
+    }
+
+    private fun validacion_iniciarSesion(rol: Boolean?){
+        val etEmail = findViewById<EditText>(R.id.etCorreo)
+        val email = etEmail.text.toString()
+        val etContra = findViewById<EditText>(R.id.etContra)
+        val password = etContra.text.toString()
+
+        // Validación de entradas vacías
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        btCliente.setOnClickListener{
-            rol = "CLIENTE"
-        }
-        btEspecialista.setOnClickListener{
-            rol = "ESPECIALISTA"
-        }
+        // Creamos instancia de retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://altoquebackendapi.onrender.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val userService = retrofit.create(AltoqueService::class.java)
+        val loginRequest = Login(email, rol, password) // Suponiendo que Login tiene un constructor que acepta email y password
+        val userRequest = userService.postLogin(loginRequest)
+
+        userRequest.enqueue(object : Callback<Login> {
+            override fun onResponse(call: Call<Login>, response: Response<Login>) {
+                if(response.isSuccessful) {
+                    navigateBasedOnRole(rol)
+                } else {
+                    Toast.makeText(this@IniciarSesion, "Error al obtener usuarios", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Login>, t: Throwable) {
+                Toast.makeText(this@IniciarSesion, "Error de red: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
-    fun isValidEmail(email: String): Boolean {
-        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+    private fun navigateBasedOnRole(rol: Boolean?) {
+        when (rol) {
+            true -> {
+                val intent = Intent(this, MenuCustomerActivity::class.java)
+                startActivity(intent)
+            }
+            false -> {
+                val intent = Intent(this, MenuExpertActivity::class.java)
+                startActivity(intent)
+            }
+            else -> {
+                Toast.makeText(this, "Por favor seleccione un rol", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
