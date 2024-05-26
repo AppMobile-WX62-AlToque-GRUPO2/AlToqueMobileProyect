@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btBack"
-        app:srcCompat="@drawable/clientprofile"
+        app:srcCompat="@drawable/default_user"
         tools:ignore="ContentDescription" />
 
     <ImageButton

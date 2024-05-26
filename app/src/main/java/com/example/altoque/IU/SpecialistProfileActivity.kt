@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.altoque.R
 import com.example.altoque.models.Specialist
 import com.example.altoque.models.Ubication
@@ -28,6 +29,8 @@ import com.example.altoque.networking.ProfessionService
 import com.example.altoque.networking.SpecialistService
 import com.example.altoque.networking.UbicationService
 import com.example.altoque.networking.UserService
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -50,6 +53,10 @@ class SpecialistProfileActivity : AppCompatActivity() {
     private lateinit var ubicationService: UbicationService
     private lateinit var professionService: ProfessionService
 
+    // Create a storage reference from our app
+    private var selectedImageUri: Uri? = null
+    private lateinit var storageRef: StorageReference
+    private var isUploadingImage = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +68,9 @@ class SpecialistProfileActivity : AppCompatActivity() {
             insets
         }
 
+        // Inicializar referencia de almacenamiento de Firebase
+        storageRef = FirebaseStorage.getInstance().reference
+
         setupRetrofit()
         loadInformation()
         setupView()
@@ -68,13 +78,10 @@ class SpecialistProfileActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            // Cuando el usuario selecciona una imagen de la galería, obtén la URI de la imagen seleccionada
-            val imageUri: Uri? = data.data
-
+            selectedImageUri = data.data
             val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
-            ivUser.setImageURI(imageUri)
+            ivUser.setImageURI(selectedImageUri)
         }
     }
 
@@ -115,7 +122,7 @@ class SpecialistProfileActivity : AppCompatActivity() {
                     val etEmail = findViewById<EditText>(R.id.etEmailAddress)
                     val etPrice = findViewById<EditText>(R.id.etPrice)
                     val etWorkExperience = findViewById<EditText>(R.id.etWorkExperience)
-
+                    val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
 
                     etName.setText(userResponse.firstName)
                     etLastname.setText(userResponse.lastName)
@@ -127,6 +134,17 @@ class SpecialistProfileActivity : AppCompatActivity() {
                     districtId = ubicationResponse.districtId
                     etPrice.setText(clientResponse.consultationPrice.toString())
                     etWorkExperience.setText(clientResponse.workExperience.toString())
+
+                    // Cargar la imagen del usuario desde la URL de la API utilizando Glide
+                    if (userResponse.avatar != null) {
+                        Glide.with(this@SpecialistProfileActivity)
+                            .load(userResponse.avatar)
+                            .placeholder(R.drawable.default_user)
+                            .into(ivUser)
+                    } else {
+                        //Si no hay imagen se le da una imagen default
+                        ivUser.setImageResource(R.drawable.default_user)
+                    }
                 }
             } catch (e: Exception) {
                 runOnUiThread {
@@ -143,13 +161,27 @@ class SpecialistProfileActivity : AppCompatActivity() {
         ibCamera.setOnClickListener {
             checkCameraPermission()
         }
+
+
         val btSave = findViewById<Button>(R.id.btSave)
         btSave.setOnClickListener {
-            updateUserUbication()
-            val updateUserRequest = createUpdateUserRequest()
-            updateUserInfo(updateUserRequest)
-            val updateSpecialistRequest = createUpdateSpecialistRequest()
-            updateSpecialistInfo(updateSpecialistRequest)
+            if (!isUploadingImage) {
+                isUploadingImage = true
+                updateUserUbication()
+                selectedImageUri?.let {
+                    uploadImageToFirebase(it) { imageUrl ->
+                        val updateUserRequest = createUpdateUserRequest(imageUrl)
+                        updateUserInfo(updateUserRequest)
+                        val updateSpecialistRequest = createUpdateSpecialistRequest()
+                        updateSpecialistInfo(updateSpecialistRequest)
+                        isUploadingImage = false // Habilitar el botón después de la actualización
+                    }
+                } ?: run {
+                    val updateUserRequest = createUpdateUserRequest(null)
+                    updateUserInfo(updateUserRequest)
+                    isUploadingImage = false // Habilitar el botón después de la actualización
+                }
+            }
         }
 
         val btBack = findViewById<Button>(R.id.btBack)
@@ -157,6 +189,20 @@ class SpecialistProfileActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun uploadImageToFirebase(imageUri: Uri, callback: (String) -> Unit) {
+        val ref = storageRef.child("images/${System.currentTimeMillis()}.jpg")
+        ref.putFile(imageUri)
+            .addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener { uri ->
+                    callback(uri.toString())
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al subir la imagen: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 
     private fun createUpdateSpecialistRequest(): Specialist {
         val etPrice = findViewById<EditText>(R.id.etPrice)
@@ -189,7 +235,7 @@ class SpecialistProfileActivity : AppCompatActivity() {
     }
 
     // Creación de objeto UpdateUserRequest con los datos de la vista
-    private fun createUpdateUserRequest(): UpdateUserRequest {
+    private fun createUpdateUserRequest(imageUrl: String?): UpdateUserRequest {
         val etName = findViewById<EditText>(R.id.etName)
         val etLastname = findViewById<EditText>(R.id.etLastname)
         val etPhone = findViewById<EditText>(R.id.etPhone)
@@ -203,7 +249,7 @@ class SpecialistProfileActivity : AppCompatActivity() {
             lastName = etLastname.text.toString(),
             phone = etPhone.text.toString(),
             birthdate = etBirthday.text.toString(),
-            avatar = null, // No estamos actualizando el avatar aquí
+            avatar = imageUrl,
             description = etDescription.text.toString(),
             ubicationId = ubicationId
         )

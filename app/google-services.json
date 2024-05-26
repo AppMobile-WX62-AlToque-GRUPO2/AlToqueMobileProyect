@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "310050269066",
+    "project_id": "altoque-89a99",
+    "storage_bucket": "altoque-89a99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310050269066:android:2c4e26eb403694bb4d0a73",
+        "android_client_info": {
+          "package_name": "com.example.altoque"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA03nBgmDb2a5B3hYkiYLql-q_SZdN5Cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
