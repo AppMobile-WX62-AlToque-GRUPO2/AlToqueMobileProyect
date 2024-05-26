@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewShowClientActivtiy"
-        app:srcCompat="@drawable/clientprofile"
+        app:srcCompat="@drawable/default_user"
         tools:ignore="ContentDescription" />
 
     <ImageButton

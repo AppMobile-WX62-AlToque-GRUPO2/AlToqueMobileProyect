@@ -68,9 +68,10 @@
         android:background="@drawable/rounded_border_background"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btBack"
-        app:srcCompat="@drawable/specialistprofile"
+        app:srcCompat="@drawable/default_user"
         tools:ignore="ContentDescription" />
 
     <ImageButton

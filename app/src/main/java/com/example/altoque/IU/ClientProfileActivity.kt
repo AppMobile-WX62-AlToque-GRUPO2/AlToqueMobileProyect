@@ -20,12 +20,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.altoque.R
 import com.example.altoque.models.Ubication
 import com.example.altoque.models.UpdateUserRequest
 import com.example.altoque.networking.ClientService
 import com.example.altoque.networking.UbicationService
 import com.example.altoque.networking.UserService
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -46,6 +49,11 @@ class clientProfileActivity : AppCompatActivity() {
     private lateinit var userService: UserService
     private lateinit var ubicationService: UbicationService
 
+    // Create a storage reference from our app
+    private var selectedImageUri: Uri? = null
+    private lateinit var storageRef: StorageReference
+    private var isUploadingImage = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,6 +64,9 @@ class clientProfileActivity : AppCompatActivity() {
             insets
         }
 
+        // Inicializar referencia de almacenamiento de Firebase
+        storageRef = FirebaseStorage.getInstance().reference
+
         setupRetrofit()
         loadInformation()
         setupView()
@@ -63,13 +74,10 @@ class clientProfileActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            // Cuando el usuario selecciona una imagen de la galería, obtén la URI de la imagen seleccionada
-            val imageUri: Uri? = data.data
-
+            selectedImageUri = data.data
             val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
-            ivUser.setImageURI(imageUri)
+            ivUser.setImageURI(selectedImageUri)
         }
     }
 
@@ -95,7 +103,6 @@ class clientProfileActivity : AppCompatActivity() {
                 ubicationId = userResponse.ubicationId
                 val ubicationResponse = ubicationService.getUbication(ubicationId)
                 runOnUiThread {
-                    // Actualizar la UI con la información cargada
                     val etName = findViewById<EditText>(R.id.etName)
                     val etLastname = findViewById<EditText>(R.id.etLastname)
                     val etPhone = findViewById<EditText>(R.id.etPhone)
@@ -103,6 +110,7 @@ class clientProfileActivity : AppCompatActivity() {
                     val etDescription = findViewById<EditText>(R.id.etDescription)
                     val etAddress = findViewById<EditText>(R.id.etAddress)
                     val etEmail = findViewById<EditText>(R.id.etEmailAddress)
+                    val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
 
                     etName.setText(userResponse.firstName)
                     etLastname.setText(userResponse.lastName)
@@ -112,10 +120,20 @@ class clientProfileActivity : AppCompatActivity() {
                     etAddress.setText(ubicationResponse.address)
                     etEmail.setText(userResponse.email)
                     districtId = ubicationResponse.districtId
+
+                    // Cargar la imagen del usuario desde la URL de la API utilizando Glide
+                    if (userResponse.avatar != null) {
+                        Glide.with(this@clientProfileActivity)
+                            .load(userResponse.avatar)
+                            .placeholder(R.drawable.default_user)
+                            .into(ivUser)
+                    } else {
+                        //Si no hay imagen se le da una imagen default
+                        ivUser.setImageResource(R.drawable.default_user)
+                    }
                 }
             } catch (e: Exception) {
                 runOnUiThread {
-                    // Manejar errores de carga de información
                     Toast.makeText(this@clientProfileActivity, "Error al cargar la información", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -130,9 +148,21 @@ class clientProfileActivity : AppCompatActivity() {
         }
         val btSave = findViewById<Button>(R.id.btSave)
         btSave.setOnClickListener {
-            updateUserUbication()
-            val updateUserRequest = createUpdateUserRequest()
-            updateUserInfo(updateUserRequest)
+            if (!isUploadingImage) {
+                isUploadingImage = true
+                updateUserUbication()
+                selectedImageUri?.let {
+                    uploadImageToFirebase(it) { imageUrl ->
+                        val updateUserRequest = createUpdateUserRequest(imageUrl)
+                        updateUserInfo(updateUserRequest)
+                        isUploadingImage = false // Habilitar el botón después de la actualización
+                    }
+                } ?: run {
+                    val updateUserRequest = createUpdateUserRequest(null)
+                    updateUserInfo(updateUserRequest)
+                    isUploadingImage = false // Habilitar el botón después de la actualización
+                }
+            }
         }
 
         // Regresar
@@ -142,8 +172,21 @@ class clientProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun uploadImageToFirebase(imageUri: Uri, callback: (String) -> Unit) {
+        val ref = storageRef.child("images/${System.currentTimeMillis()}.jpg")
+        ref.putFile(imageUri)
+            .addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener { uri ->
+                    callback(uri.toString())
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al subir la imagen: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     // Creación de objeto UpdateUserRequest con los datos de la vista
-    private fun createUpdateUserRequest(): UpdateUserRequest {
+    private fun createUpdateUserRequest(imageUrl: String?): UpdateUserRequest {
         val etName = findViewById<EditText>(R.id.etName)
         val etLastname = findViewById<EditText>(R.id.etLastname)
         val etPhone = findViewById<EditText>(R.id.etPhone)
@@ -157,11 +200,13 @@ class clientProfileActivity : AppCompatActivity() {
             lastName = etLastname.text.toString(),
             phone = etPhone.text.toString(),
             birthdate = etBirthday.text.toString(),
-            avatar = null, // No estamos actualizando el avatar aquí
+            avatar = imageUrl,
             description = etDescription.text.toString(),
             ubicationId = ubicationId
         )
     }
+
+
 
     // Actualización de la ubicación del usuario en el servidor
     private fun updateUserUbication() {
