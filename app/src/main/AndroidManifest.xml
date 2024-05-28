@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Altoque"
         tools:targetApi="31">
+        <activity
+            android:name=".IU.SpecialistServicesActivity"
+            android:exported="false" />
         <activity
             android:name=".IU.ShowSpecialistProfileActivity"
             android:exported="false" />
@@ -61,7 +63,7 @@
             android:name=".IU.CustomerCreatePost"
             android:exported="false" />
         <activity
-            android:name=".IU.PublicationActivity"
+            android:name=".IU.SpecialistPublicationDetailActivity"
             android:exported="false" />
         <activity
             android:name=".IU.AgendaActivity"

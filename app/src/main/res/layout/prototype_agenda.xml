@@ -1,79 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CustomCardViewStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#CCCCCC">
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="10dp">
 
-    <TextView
-        android:id="@+id/tvPublication"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/publicacion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivImageUrl"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/in_progess"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivImageUrl"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <LinearLayout
+            android:id="@+id/llSpeAgeInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivSpeAgeImage"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/estado_de_solicitud"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/ivImageUrl"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvSpeAgeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textColor="?attr/colorOnPrimary"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/ubicacion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivImageUrl"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+            <TextView
+                android:id="@+id/tvSpeAgeAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address" />
 
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/descripcion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivImageUrl"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvSpeAgeIsPublish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/publicacion"
+                android:textColor="@color/yellow" />
 
-    <ImageView
-        android:id="@+id/ivImageUrl"
-        android:layout_width="178dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvSpeAgeTitleState"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/estado_de_solicitud"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSpeAgeState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/in_progess"
+                android:textColor="@color/in_progress"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivSpeAgeImage"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            app:circularflow_defaultRadius="20dp"
+            app:circularflow_radiusInDP="20dp"
+            app:layout_constraintCircleRadius="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/llSpeAgeInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_class_24" />
+
+        <Button
+            android:id="@+id/btnSpeAgeFinish"
+            android:layout_width="170dp"
+            android:layout_height="41dp"
+            android:padding="3dp"
+            android:text="Terminar Trabajo"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:cornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llSpeAgeInfo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

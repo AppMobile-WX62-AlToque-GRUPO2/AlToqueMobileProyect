@@ -70,7 +70,6 @@ class MenuCustomerActivity : AppCompatActivity() {
         GoToCreatePost()
         GoToMyPosts2()
         clientId = intent.getIntExtra("clientId", 1)
-        postsAdapter = PostAdapter(emptyList())
 
         loadPublications(clientId)
     }
@@ -141,5 +140,5 @@ class MenuCustomerActivity : AppCompatActivity() {
         }
     }
 
-    
+
 }

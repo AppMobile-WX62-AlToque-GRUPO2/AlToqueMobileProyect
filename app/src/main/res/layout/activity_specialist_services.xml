@@ -5,24 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IU.AgendaActivity">
+    tools:context=".IU.SpecialistServicesActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbrSpeAgenda"
+        android:id="@+id/tbrSpeServices"
         android:layout_width="430dp"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
+        android:paddingHorizontal="8dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Agenda" />
+        app:title="Servicios" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSpeAgenda"
+        android:id="@+id/rvSpeServices"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -30,6 +30,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbrSpeAgenda" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tbrSpeServices" />
 </androidx.constraintlayout.widget.ConstraintLayout>
