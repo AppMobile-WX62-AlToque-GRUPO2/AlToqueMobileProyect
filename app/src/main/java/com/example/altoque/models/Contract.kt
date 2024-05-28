@@ -5,19 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Post (
+data class Contract (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     @ColumnInfo
-    val address: String,
+    var state: Int?,
     @ColumnInfo
-    val is_publish: Boolean,
+    val specialistId: Int?,
     @ColumnInfo
-    val image: String,
-    @ColumnInfo
-    val title: String,
-    @ColumnInfo
-    val description: String,
-    @ColumnInfo
-    val clientId: String,
+    val availableDateId: Int?
 )

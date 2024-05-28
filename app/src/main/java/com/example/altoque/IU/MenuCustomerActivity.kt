@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.altoque.R
+import com.example.altoque.adapter.OnItemClickListenerPost
 import com.example.altoque.adapter.PostAdapter
 import com.example.altoque.models.Post
 import com.example.altoque.networking.ClientService
@@ -25,7 +26,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MenuCustomerActivity : AppCompatActivity() {
+class MenuCustomerActivity : AppCompatActivity(), OnItemClickListenerPost {
 
     lateinit var posts : List<Post>
     lateinit var postsAdapter: PostAdapter
@@ -70,7 +71,6 @@ class MenuCustomerActivity : AppCompatActivity() {
         GoToCreatePost()
         GoToMyPosts2()
         clientId = intent.getIntExtra("clientId", 1)
-        postsAdapter = PostAdapter(emptyList())
 
         loadPublications(clientId)
     }
@@ -90,7 +90,7 @@ class MenuCustomerActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Post>>, response: retrofit2.Response<List<Post>>) {
                 if (response.isSuccessful) {
                     posts = response.body()!!
-                    postsAdapter = PostAdapter(posts)
+                    postsAdapter = PostAdapter(posts, this@MenuCustomerActivity)
                     rvPosts.adapter = postsAdapter
                     rvPosts.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MenuCustomerActivity)
                 }
@@ -141,5 +141,9 @@ class MenuCustomerActivity : AppCompatActivity() {
         }
     }
 
-    
+    override fun onItemClicked(post: Post) {
+        TODO("Not yet implemented")
+    }
+
+
 }
