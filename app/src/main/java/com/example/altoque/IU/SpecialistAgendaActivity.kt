@@ -20,14 +20,14 @@ import com.example.altoque.networking.PostService
 import com.example.altoque.networking.RetrofitClient
 import kotlinx.coroutines.launch
 
-class AgendaActivity : AppCompatActivity(), OnItemClickListenerContract {
+class SpecialistAgendaActivity : AppCompatActivity(), OnItemClickListenerContract {
 
     lateinit var agendaAdapter : AgendaAdapter
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_agenda)
+        setContentView(R.layout.activity_specialist_agenda)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -57,9 +57,9 @@ class AgendaActivity : AppCompatActivity(), OnItemClickListenerContract {
                     val posts = responsePost.body() ?: emptyList()
                     val contracts = responseContract.body() ?: emptyList()
 
-                    agendaAdapter = AgendaAdapter(posts, contracts, this@AgendaActivity)
+                    agendaAdapter = AgendaAdapter(posts, contracts, this@SpecialistAgendaActivity)
                     rvAgenda.adapter = agendaAdapter
-                    rvAgenda.layoutManager = LinearLayoutManager(this@AgendaActivity)
+                    rvAgenda.layoutManager = LinearLayoutManager(this@SpecialistAgendaActivity)
                 } else {
                     showToast("Failed to load contracts")
                 }

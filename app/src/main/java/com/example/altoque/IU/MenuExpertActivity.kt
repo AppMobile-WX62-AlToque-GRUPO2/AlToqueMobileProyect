@@ -103,7 +103,7 @@ class MenuExpertActivity : AppCompatActivity(), OnItemClickListenerPost {
         val ivAgenda = findViewById<ImageView>(R.id.ivSpeHomAgenda)
 
         ivAgenda.setOnClickListener {
-            startActivity(Intent(this, AgendaActivity::class.java))
+            startActivity(Intent(this, SpecialistAgendaActivity::class.java))
         }
     }
 
