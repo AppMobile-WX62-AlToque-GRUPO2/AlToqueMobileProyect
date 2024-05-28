@@ -40,7 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/publicacion"
-                android:textColor="@color/yellow" />
+                android:textColor="@color/yellow"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvSpeAgeTitleState"

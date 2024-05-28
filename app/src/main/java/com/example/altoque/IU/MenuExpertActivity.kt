@@ -13,19 +13,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.altoque.R
-import com.example.altoque.adapter.OnItemClickListener
-import com.example.altoque.adapter.ServicesAdapter
+import com.example.altoque.adapter.OnItemClickListenerPost
+import com.example.altoque.adapter.PostAdapter
 import com.example.altoque.models.Post
 import com.example.altoque.networking.PostService
 import com.example.altoque.networking.RetrofitClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
-class MenuExpertActivity : AppCompatActivity(), OnItemClickListener {
+class MenuExpertActivity : AppCompatActivity(), OnItemClickListenerPost {
 
     lateinit var post : Post
     lateinit var posts : List<Post>
-    lateinit var postAdapter : ServicesAdapter
+    lateinit var postAdapter : PostAdapter
     
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +76,7 @@ class MenuExpertActivity : AppCompatActivity(), OnItemClickListener {
                 if (response.isSuccessful) {
                     val publications = response.body() ?: emptyList()
 
-                    postAdapter = ServicesAdapter(publications, this@MenuExpertActivity)
+                    postAdapter = PostAdapter(publications, this@MenuExpertActivity)
                     rvPublication.adapter = postAdapter
                     rvPublication.layoutManager = LinearLayoutManager(this@MenuExpertActivity)
                 } else {
@@ -95,7 +95,7 @@ class MenuExpertActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onItemClicked(post: Post) {
         val intent = Intent(this, SpecialistPublicationDetailActivity::class.java)
-        //intent.putExtra("ID_POST", post.id.toString())
+        intent.putExtra("ID_POST", post.id.toString())
         startActivity(intent)
     }
 

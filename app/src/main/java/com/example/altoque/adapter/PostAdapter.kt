@@ -5,38 +5,51 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.altoque.R
 import com.example.altoque.models.Post
+import com.squareup.picasso.Picasso
 
-class PostAdapter(var posts: List<Post>): RecyclerView.Adapter<PostPrototype>() {
+class PostAdapter(var posts: List<Post>, val itemClickListener: OnItemClickListenerPost): RecyclerView.Adapter<PostPrototype>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostPrototype {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.prototype_post, parent, false)
+        var view = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.prototype_post, parent, false)
+
         return PostPrototype(view)
+    }
+
+    override fun onBindViewHolder(holder: PostPrototype, position: Int) {
+        holder.bind(posts.get(position), itemClickListener)
     }
 
     override fun getItemCount(): Int {
         return posts.size
     }
-
-    override fun onBindViewHolder(holder: PostPrototype, position: Int) {
-        holder.bind(posts[position])
-    }
 }
 
 class PostPrototype(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val tvPostTitle = itemView.findViewById<TextView>(R.id.tvPostTitle)
-    val tvPostAdd = itemView.findViewById<TextView>(R.id.tvPostAdd)
-    val tvPostDescript = itemView.findViewById<TextView>(R.id.tvPostDescript)
-    val ivPostPublication = itemView.findViewById<ImageView>(R.id.ivPostPublication)
+    var tvTitle = itemView.findViewById<TextView>(R.id.tvPostTitle)
+    var tvAddress = itemView.findViewById<TextView>(R.id.tvPostAdd)
+    var ivImage = itemView.findViewById<ImageView>(R.id.ivPostPublication)
+    var tvIsPublish = itemView.findViewById<TextView>(R.id.tvPostDescript)
+    var cvPubPrototype = itemView.findViewById<CardView>(R.id.cvPostPrototype)
 
-    fun bind(post: Post) {
-        tvPostTitle.text = post.title
-        tvPostAdd.text = post.address
-        tvPostDescript.text = post.description
+    fun bind(post: Post, itemClickListener: OnItemClickListenerPost){
+        tvTitle.text = post.title
+        tvAddress.text = post.address
+        Picasso.get().load(post.image).into(ivImage)
 
-        Glide.with(itemView.context).load(post.image).into(ivPostPublication)
+        if (post.is_publish) tvIsPublish.text = "Hace 20 minutos" else tvIsPublish.text = "Inactivo"
+
+        cvPubPrototype.setOnClickListener {
+            itemClickListener.onItemClicked(post)
+        }
     }
+}
+
+interface OnItemClickListenerPost {
+    fun onItemClicked(post: Post)
 }

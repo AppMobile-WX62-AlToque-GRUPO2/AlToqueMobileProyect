@@ -32,7 +32,7 @@
             android:id="@+id/tvSpeHomMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AlToque"
+            android:text="AlToque!"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="34sp"
             android:textStyle="bold"
