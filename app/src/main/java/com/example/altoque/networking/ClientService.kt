@@ -1,6 +1,7 @@
 package com.example.altoque.networking
 
 import com.example.altoque.models.Client
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
@@ -12,4 +13,7 @@ interface ClientService {
 
     @PUT("clients/{id}")
     suspend fun updateClient(@Path("id") clientId: Int, @Body client: Client): Client
+
+    @GET("clients/{id}")
+    suspend fun getById(@Path("id") id: String): Response<Client>
 }

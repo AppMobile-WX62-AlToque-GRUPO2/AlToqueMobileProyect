@@ -17,7 +17,7 @@ class ClientNotification : AppCompatActivity()  {
 
     lateinit var notifications : List<Notification>
     lateinit var notificationAdapter: NotificationAdapter
-
+    var userId: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,23 +30,23 @@ class ClientNotification : AppCompatActivity()  {
 
 
         notificationAdapter = NotificationAdapter(emptyList())
-
-        loadNotification()
+        userId = intent.getIntExtra("userId", 1)
+        loadNotification(userId)
 
     }
 
-    private fun loadNotification() {
+    private fun loadNotification(userId: Int) {
 
         val rvClientNoti = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvClientNoti)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://altoquebackendapi.onrender.com")
+            .baseUrl("https://altoquebackendapi.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val service = retrofit.create(NotificationService::class.java)
 
-        val request = service.getNotifications()
+        val request = service.getNotificationsbyUser(userId)
 
         request.enqueue(object : retrofit2.Callback<List<Notification>> {
             override fun onResponse(call: retrofit2.Call<List<Notification>>, response: retrofit2.Response<List<Notification>>) {
