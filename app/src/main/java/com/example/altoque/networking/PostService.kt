@@ -2,6 +2,7 @@ package com.example.altoque.networking
 
 import com.example.altoque.models.Post
 import com.example.altoque.models.PostResponse
+import com.example.altoque.models.PostUpload
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -30,5 +31,5 @@ interface PostService {
     fun getPostById(@Path("post_id") postId: Int): Call<PostResponse>
     
     @POST("posts")
-    fun insertPost(@Body post: Post) : Call<PostResponse>
+    fun insertPost(@Body post: PostUpload) : Call<PostResponse>
 }

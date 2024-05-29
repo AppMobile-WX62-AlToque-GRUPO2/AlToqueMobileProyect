@@ -24,6 +24,7 @@ import com.example.altoque.R
 import com.example.altoque.adapter.ScheduleAdapter
 import com.example.altoque.models.Post
 import com.example.altoque.models.PostResponse
+import com.example.altoque.models.PostUpload
 import com.example.altoque.models.Schedule
 import com.example.altoque.networking.PostService
 import com.example.altoque.repository.ScheduleDatabase
@@ -80,7 +81,7 @@ class CustomerCreatePost : AppCompatActivity() {
             //var image = ivPost.text.toString()
             
             
-            var post = Post(title, desc, district, "image", is_publish, clientId)
+            var post = PostUpload(title, desc, district, "image", is_publish, clientId)
             
             var request = service.insertPost(post)
             
