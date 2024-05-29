@@ -18,7 +18,6 @@ class SpecialistNotification : AppCompatActivity() {
 
     lateinit var notifications : List<Notification>
     lateinit var notificationAdapter: NotificationAdapter
-    var userId: Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +29,23 @@ class SpecialistNotification : AppCompatActivity() {
             insets
         }
 
-        userId = intent.getIntExtra("userId", 2)
         notificationAdapter = NotificationAdapter(emptyList())
-        loadNotification(userId)
+        loadNotification()
 
     }
 
-    private fun loadNotification(userId: Int) {
+    private fun loadNotification() {
 
             val rvSpecialistNoti = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvSpecialistNotification)
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://altoquebackendapi.onrender.com/")
+                .baseUrl("https://altoquebackendapi.onrender.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
             val service = retrofit.create(NotificationService::class.java)
 
-            val request = service.getNotificationsbyUser(userId)
+            val request = service.getNotifications()
 
             request.enqueue(object : retrofit2.Callback<List<Notification>> {
                 override fun onResponse(call: Call<List<Notification>>, response: retrofit2.Response<List<Notification>>) {
