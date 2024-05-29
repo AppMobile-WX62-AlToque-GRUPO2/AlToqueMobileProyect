@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Altoque"
+rootProject.name = "Test2"
 include(":app")
  

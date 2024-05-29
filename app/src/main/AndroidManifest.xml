@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+  
     <!-- Permite que los permisos se muestren porque por default están ocultos -->
     <uses-feature
         android:name="android.hardware.camera"
@@ -16,11 +17,13 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Altoque"
+        android:theme="@style/Theme.Test2"
         tools:targetApi="31">
         <activity
+
             android:name=".IU.SpecialistServicesActivity"
             android:exported="false" />
         <activity
@@ -76,12 +79,15 @@
             android:exported="false" />
         <activity
             android:name=".IU.SpecialistNotification"
+
+            android:name=".specialist_detail"
+
             android:exported="false" />
         <activity
-            android:name=".IU.ClientNotification"
+            android:name=".detail_publication"
             android:exported="false" />
         <activity
-            android:name=".IU.AltoqueInicio"
+            android:name=".UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
