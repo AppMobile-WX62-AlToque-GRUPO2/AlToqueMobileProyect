@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <!-- Permite que los permisos se muestren porque por default están ocultos -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-
+    
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -28,6 +28,12 @@
             android:exported="false" />
         <activity
             android:name=".IU.ShowClientProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ScheduleListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ScheduleActivity"
             android:exported="false" />
         <activity
             android:name=".IU.MenuExpertActivity"

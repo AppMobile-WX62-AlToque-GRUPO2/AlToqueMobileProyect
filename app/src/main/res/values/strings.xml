@@ -89,4 +89,18 @@
     <string name="experiencia_laboral_a_os">Experiencia laboral (Años)</string>
     <string name="precio_de_consulta">Precio de consulta</string>
     <string name="especialista">Especialista</string>
+    <string name="create_post_camara_desc">button to take a picture of the customer\'s problem</string>
+    <string name="create_post_image_desc">image of customer problem</string>
+    <string name="prototype_datetime_date">Fecha</string>
+    <string name="title_datetime">Horarios</string>
+    <string name="symbol_add_datetime">+</string>
+    <string name="accept_schedule_creation">Aceptar</string>
+    <string name="cancel_schedule_creation">Cancelar</string>
+    <string name="title_datetime_post_creation">Horario</string>
+    <string name="schedule_creation_hint_endtime">Hora de fin</string>
+    <string name="schedule_creation_hint_starttime">Hora de inicio</string>
+    <string name="prototype_datetime_starttime">Hora de inicio</string>
+    <string name="new_schedule_prototype_title">Nuevo horario</string>
+    <string name="prototype_datetime_endtime">Hora de fin</string>
+    <string name="bt_send_schedules">Publicar</string>
 </resources>
