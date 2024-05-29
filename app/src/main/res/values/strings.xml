@@ -26,6 +26,7 @@
     <string name="profesionales_que_aceptaron">Profesionales que aceptaron</string>
     <string name="Horario_description">Imagen de horario</string>
     <string name="time_range_string">00:00 - 00:00</string>
+    <string name="horarios_disponibles">Horarios Disponibles</string>
     <string name="horarios_disponibles_title">Horarios Disponibles</string>
     <string name="cancelar">Cancelar</string>
     <string name="nombre_completo">Nombre Completo:</string>
@@ -50,7 +51,6 @@
     <string name="ubicacion">Ubicacion</string>
     <string name="_08_00_10_00_am">08:00 - 10:00 am</string>
     <string name="_13_00_17_00_pm">13:00 - 17:00 pm</string>
-    <string name="horarios_disponibles">Horarios Disponibles</string>
     <string name="aceptar">Aceptar</string>
     <string name="numero_telefonico_51_997_554_415">numero_telefonico_51_997_554_415</string>
     <string name="correo_electronico_jose_pereyra_gmail_com">correo_electronico_jose_pereyra_gmail_com</string>
@@ -62,4 +62,18 @@
     <string name="lima_san_isidro">Lima, San Isidro</string>
     <string name="hace_20_min_16_04_2024">Hace 20 min - 16/04/2024</string>
     <string name="btSpcMenuProfile">Ver perfil de especialista</string>
+    <string name="create_post_camara_desc">button to take a picture of the customer\'s problem</string>
+    <string name="create_post_image_desc">image of customer problem</string>
+    <string name="prototype_datetime_date">Fecha</string>
+    <string name="title_datetime">Horarios</string>
+    <string name="symbol_add_datetime">+</string>
+    <string name="accept_schedule_creation">Aceptar</string>
+    <string name="cancel_schedule_creation">Cancelar</string>
+    <string name="title_datetime_post_creation">Horario</string>
+    <string name="schedule_creation_hint_endtime">Hora de fin</string>
+    <string name="schedule_creation_hint_starttime">Hora de inicio</string>
+    <string name="prototype_datetime_starttime">Hora de inicio</string>
+    <string name="new_schedule_prototype_title">Nuevo horario</string>
+    <string name="prototype_datetime_endtime">Hora de fin</string>
+    <string name="bt_send_schedules">Publicar</string>
 </resources>
