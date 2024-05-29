@@ -5,31 +5,41 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IU.SpecialistAgendaActivity">
+    tools:context=".IU.AgendaActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbrSpeAgenda"
+        android:id="@+id/toolbar"
         android:layout_width="430dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Agenda" />
+        app:navigationIcon="@android:drawable/ic_menu_gallery"
+        app:title="Detalle de Publicación"
+        app:titleTextColor="#000000" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSpeAgenda"
-        android:layout_width="0dp"
+        android:id="@+id/rvAgenda"
+        android:layout_width="409dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbrSpeAgenda" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

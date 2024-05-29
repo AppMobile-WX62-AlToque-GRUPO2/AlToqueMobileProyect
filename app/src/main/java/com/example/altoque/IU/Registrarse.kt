@@ -35,7 +35,7 @@ class Registrarse : AppCompatActivity() {
         val btEspecialista = findViewById<Button>(R.id.btEspecialista)
 
         val tvIniciarSesion = findViewById<TextView>(R.id.tvIniciarSesion)
-        var rol: Boolean = true
+        var rol: Boolean? = null
 
         btRegistrarme.setOnClickListener {
             registro(rol)
@@ -50,7 +50,7 @@ class Registrarse : AppCompatActivity() {
 
     }
 
-    private fun registro(rol: Boolean) {
+    private fun registro(rol: Boolean?) {
 
         val etEmail = findViewById<EditText>(R.id.etCorreo)
         val email = etEmail.text.toString()
@@ -62,7 +62,7 @@ class Registrarse : AppCompatActivity() {
         val repeatPassword = etRepeatPassword.text.toString()
 
         // Validación de entradas vacías
-        if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty() || rol == null) {
             Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show()
             return
         }
@@ -81,8 +81,7 @@ class Registrarse : AppCompatActivity() {
 
         val userService = retrofit.create(AltoqueService::class.java)
         val registerRequest = Register(email, password, rol,
-            "Carlos","Onofre","933373674",
-            "16-10-2003","aea", "Soy inge de soft",3,1)
+            "","","","","", "",0,0)
         val userRequest = userService.postRegister(registerRequest)
 
 
@@ -92,16 +91,7 @@ class Registrarse : AppCompatActivity() {
                     Toast.makeText(this@Registrarse, "Se creo el usuario correctamente", Toast.LENGTH_SHORT).show()
 
                 } else {
-                    /*
-                    Toast.makeText(this@Registrarse,
-                        "usuario: ${email},password: $password ,rol: $rol" +
-                                ",firstname: ${registerRequest.firstName} ,LastName: ${registerRequest.lastName}" +
-                                ",phone: ${registerRequest.phone},hb: ${registerRequest.birthdate}" +
-                                ",avatar: ${registerRequest.avatar},descrip: ${registerRequest.description} " +
-                                ",rating: ${registerRequest.rating},idUbication: ${registerRequest.ubicationId}", Toast.LENGTH_SHORT).show()
-                    */
-                    val errorBody = response.errorBody()?.string()
-                    Toast.makeText(this@Registrarse, "Error al registrar usuario: $errorBody", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Registrarse, "Error al obtener usuarios", Toast.LENGTH_SHORT).show()
                 }
             }
 
