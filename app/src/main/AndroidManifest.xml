@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permite que los permisos se muestren porque por default están ocultos -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,16 +19,79 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Test2"
+        android:theme="@style/Theme.Altoque"
         tools:targetApi="31">
         <activity
-            android:name=".specialist_detail"
+            android:name=".IU.PublicationsList"
             android:exported="false" />
         <activity
-            android:name=".detail_publication"
+            android:name=".IU.DetailPublication"
             android:exported="false" />
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".IU.SpecialistDetail"
+            android:exported="false" />
+        <activity
+            android:name=".IU.SpecialistServicesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ShowSpecialistProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ShowClientProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ScheduleListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.MenuExpertActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.MenuCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.PublicationDetailEspecialist"
+            android:exported="false" />
+        <activity
+            android:name=".IU.PublicationDetail"
+            android:exported="false" />
+        <activity
+            android:name=".IU.PublicationList"
+            android:exported="false" />
+        <activity
+            android:name=".IU.SpecialistProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.clientProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.Registrarse"
+            android:exported="false" />
+        <activity
+            android:name=".IU.IniciarSesion"
+            android:exported="false" />
+        <activity
+            android:name=".IU.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.CustomerCreatePost"
+            android:exported="false" />
+        <activity
+            android:name=".IU.SpecialistPublicationDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.SpecialistAgendaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IU.SpecialistNotification"
+            android:exported="false" />
+        <activity
+            android:name=".IU.ClientNotification"
+            android:exported="false" />
+        <activity
+            android:name=".IU.AltoqueInicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

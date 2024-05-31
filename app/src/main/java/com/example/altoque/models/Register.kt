@@ -3,7 +3,7 @@ package com.example.altoque.models
 class Register (
     val email: String,
     val password: String,
-    val role: Boolean?,
+    val role: Boolean,
     val firstName: String,
     val lastName: String,
     val phone: String,
