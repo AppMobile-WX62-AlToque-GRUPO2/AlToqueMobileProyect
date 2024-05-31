@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-  
     <!-- Permite que los permisos se muestren porque por default están ocultos -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -20,10 +19,18 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Test2"
+        android:theme="@style/Theme.Altoque"
         tools:targetApi="31">
         <activity
-
+            android:name=".IU.PublicationsList"
+            android:exported="false" />
+        <activity
+            android:name=".IU.DetailPublication"
+            android:exported="false" />
+        <activity
+            android:name=".IU.SpecialistDetail"
+            android:exported="false" />
+        <activity
             android:name=".IU.SpecialistServicesActivity"
             android:exported="false" />
         <activity
@@ -79,15 +86,12 @@
             android:exported="false" />
         <activity
             android:name=".IU.SpecialistNotification"
-
-            android:name=".specialist_detail"
-
             android:exported="false" />
         <activity
-            android:name=".detail_publication"
+            android:name=".IU.ClientNotification"
             android:exported="false" />
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".IU.AltoqueInicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

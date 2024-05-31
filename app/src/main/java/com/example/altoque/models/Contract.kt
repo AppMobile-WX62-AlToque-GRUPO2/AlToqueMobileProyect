@@ -9,9 +9,9 @@ data class Contract (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     @ColumnInfo
-    var state: Int?,
+    var state: Int,
     @ColumnInfo
-    val specialistId: Int?,
+    val specialistId: Int,
     @ColumnInfo
-    val availableDateId: Int?
+    val availableDateId: Int
 )

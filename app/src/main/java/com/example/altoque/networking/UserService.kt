@@ -2,6 +2,7 @@ package com.example.altoque.networking
 
 import com.example.altoque.models.UpdateUserRequest
 import com.example.altoque.models.User
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -17,4 +18,7 @@ interface UserService {
 
     @GET("users/{id}")
     suspend fun getById(@Path("id") id: String): Response<User>
+
+    @GET("users/{id}")
+    fun getUserById(@Path("id") id: Int): Call<User>
 }
