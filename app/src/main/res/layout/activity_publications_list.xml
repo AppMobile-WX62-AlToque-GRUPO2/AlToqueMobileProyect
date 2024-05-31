@@ -11,27 +11,29 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="8dp"
         android:text="Mis publicaciones"
+        android:textColor="#000000"
         android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rvPublication"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPublication"
         android:layout_width="0dp"
-        android:layout_height="580dp"
+
+        android:layout_height="540dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/ibAddPost"
@@ -48,4 +50,18 @@
         app:layout_constraintTop_toBottomOf="@+id/rvPublication"
         app:srcCompat="@android:drawable/ic_menu_add"
         app:tint="#000000" />
+
+    <ImageButton
+        android:id="@+id/btBackPublication"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toTopOf="@+id/rvPublication"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
