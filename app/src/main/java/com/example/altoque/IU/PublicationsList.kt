@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
+
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,10 +31,11 @@ class PublicationsList : AppCompatActivity(), OnItemClickListener {
         enableEdgeToEdge()
         setContentView(R.layout.activity_publications_list)
 
+
         findViewById<ImageButton>(R.id.btBackPublication).setOnClickListener {
             onBackPressed()
         }
-
+        
         rvPublications = findViewById(R.id.rvPublication)
         rvPublications.layoutManager = LinearLayoutManager(this)
 
