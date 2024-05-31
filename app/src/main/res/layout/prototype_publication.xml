@@ -73,8 +73,8 @@
 
         <ImageButton
             android:id="@+id/ibDeleteContractEspecialistProposal"
-            android:layout_width="53dp"
-            android:layout_height="47dp"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/transparent"
@@ -86,8 +86,8 @@
 
         <ImageButton
             android:id="@+id/ibEditPublication"
-            android:layout_width="55dp"
-            android:layout_height="47dp"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="4dp"
             android:backgroundTint="#00050505"
             app:layout_constraintBottom_toBottomOf="parent"
