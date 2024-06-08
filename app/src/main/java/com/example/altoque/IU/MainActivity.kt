@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     fun redirectToListPost(){
-        val intent = Intent(this, PublicationList::class.java)
+        val intent = Intent(this, PublicationsList::class.java)
         startActivity(intent)
     }
     

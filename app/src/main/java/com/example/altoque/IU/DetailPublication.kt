@@ -65,7 +65,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
 
     private fun loadProfessionals() {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8001/")
+            .baseUrl("https://altoquebackendapi.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

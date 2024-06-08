@@ -52,7 +52,7 @@ class IniciarSesion : AppCompatActivity() {
     }
 
     private fun registrarse() {
-        val intent = Intent(this, PublicationsList::class.java)
+        val intent = Intent(this, Registrarse::class.java)
         startActivity(intent)
     }
 
