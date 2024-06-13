@@ -27,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class IniciarSesion : AppCompatActivity() {
     lateinit var token : TokenLogin
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -86,13 +87,33 @@ class IniciarSesion : AppCompatActivity() {
         val loginRequest = Login(email, rol, password) // Suponiendo que Login tiene un constructor que acepta email y password
         val userRequest = userService.postLogin(loginRequest)
 
+        val tokenRequest = userService.getTokenInfo()
+
         userRequest.enqueue(object : Callback<Login> {
             override fun onResponse(call: Call<Login>, response: Response<Login>) {
                 if(response.isSuccessful) {
                     //NECESITO UN GET DE LOGIN QUE ME RETORNE EL ACCESS Y EL TYPE POR ESTE CODIGO
-                    //token= response.body()!!
-                    //Toast.makeText(this@IniciarSesion, "${userRequest}", Toast.LENGTH_SHORT).show()
-                    navigateBasedOnRole(rol)
+                    // TOKEN LOGIN
+
+
+                    tokenRequest.enqueue(object : Callback<TokenLogin> {
+                        override fun onResponse(p0: Call<TokenLogin>, p1: Response<TokenLogin>) {
+                            if(p1.isSuccessful) {
+                                //NECESITO UN GET DE LOGIN QUE ME RETORNE EL ACCESS Y EL TYPE POR ESTE CODIGO
+                                // TOKEN LOGIN
+                                //token = p1.body()!!
+                                Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN:GAAA, TYPE: GA"
+                                    , Toast.LENGTH_SHORT).show()
+                                //Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN: ${token.access_token}, TYPE:${token.token_type}"
+                                //    , Toast.LENGTH_SHORT).show()
+                                //navigateBasedOnRole(rol)
+                            } else { Toast.makeText(this@IniciarSesion, "Error al obtener token", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        override fun onFailure(call: Call<TokenLogin>, t: Throwable) {
+                            Toast.makeText(this@IniciarSesion, "Error de red: ${t.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
                 } else {
                     Toast.makeText(this@IniciarSesion, "Error al obtener usuarios", Toast.LENGTH_SHORT).show()
                 }
