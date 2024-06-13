@@ -13,15 +13,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.altoque.R
 import com.example.altoque.models.Login
+import com.example.altoque.models.Notification
+import com.example.altoque.models.TokenLogin
 import com.example.altoque.networking.AltoqueService
+import com.example.altoque.networking.RetrofitClient.retrofit
+import com.example.altoque.networking.SharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.await
 import retrofit2.converter.gson.GsonConverterFactory
 
 class IniciarSesion : AppCompatActivity() {
-
+    lateinit var token : TokenLogin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,6 +45,9 @@ class IniciarSesion : AppCompatActivity() {
 
         var rol: Boolean? = null
 
+        // SharedPreferences para guardar el userId del VerifyToken
+        val sharedPreference = SharedPreferences(this)
+
         btIniciarSesion.setOnClickListener {
             validacion_iniciarSesion(rol)
         }
@@ -50,7 +58,6 @@ class IniciarSesion : AppCompatActivity() {
         btCliente.setOnClickListener{ rol = true }
         btEspecialista.setOnClickListener{ rol = false }
     }
-
     private fun registrarse() {
         val intent = Intent(this, Registrarse::class.java)
         startActivity(intent)
@@ -61,6 +68,7 @@ class IniciarSesion : AppCompatActivity() {
         val email = etEmail.text.toString()
         val etContra = findViewById<EditText>(R.id.etContra)
         val password = etContra.text.toString()
+
 
         // Validación de entradas vacías
         if (email.isEmpty() || password.isEmpty()) {
@@ -81,6 +89,9 @@ class IniciarSesion : AppCompatActivity() {
         userRequest.enqueue(object : Callback<Login> {
             override fun onResponse(call: Call<Login>, response: Response<Login>) {
                 if(response.isSuccessful) {
+                    //NECESITO UN GET DE LOGIN QUE ME RETORNE EL ACCESS Y EL TYPE POR ESTE CODIGO
+                    //token= response.body()!!
+                    //Toast.makeText(this@IniciarSesion, "${userRequest}", Toast.LENGTH_SHORT).show()
                     navigateBasedOnRole(rol)
                 } else {
                     Toast.makeText(this@IniciarSesion, "Error al obtener usuarios", Toast.LENGTH_SHORT).show()
@@ -91,6 +102,22 @@ class IniciarSesion : AppCompatActivity() {
                 Toast.makeText(this@IniciarSesion, "Error de red: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun retorna(rol: Boolean?){
+        val etEmail = findViewById<EditText>(R.id.etCorreo)
+        val email = etEmail.text.toString()
+        val etContra = findViewById<EditText>(R.id.etContra)
+        val password = etContra.text.toString()
+
+        val access_token: String
+        val token_type: String
+
+        val userService = retrofit.create(AltoqueService::class.java)
+        val loginRequest = Login(email, rol, password) // Suponiendo que Login tiene un constructor que acepta email y password
+        val userRequest = userService.postLogin(loginRequest)
+        loginRequest
+
     }
 
     private fun navigateBasedOnRole(rol: Boolean?) {
