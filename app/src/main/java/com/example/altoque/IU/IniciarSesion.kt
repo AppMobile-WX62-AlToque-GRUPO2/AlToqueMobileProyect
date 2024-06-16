@@ -14,7 +14,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.altoque.R
 import com.example.altoque.models.Login
 import com.example.altoque.models.Notification
+import com.example.altoque.models.Register
 import com.example.altoque.models.TokenLogin
+import com.example.altoque.models.VTokenData
+import com.example.altoque.models.VerifyToken
 import com.example.altoque.networking.AltoqueService
 import com.example.altoque.networking.RetrofitClient.retrofit
 import com.example.altoque.networking.SharedPreferences
@@ -27,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class IniciarSesion : AppCompatActivity() {
     lateinit var token : TokenLogin
-
+    lateinit var vTokenData : VTokenData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -92,21 +95,38 @@ class IniciarSesion : AppCompatActivity() {
         userRequest.enqueue(object : Callback<Login> {
             override fun onResponse(call: Call<Login>, response: Response<Login>) {
                 if(response.isSuccessful) {
-                    //NECESITO UN GET DE LOGIN QUE ME RETORNE EL ACCESS Y EL TYPE POR ESTE CODIGO
-                    // TOKEN LOGIN
-
 
                     tokenRequest.enqueue(object : Callback<TokenLogin> {
                         override fun onResponse(p0: Call<TokenLogin>, p1: Response<TokenLogin>) {
                             if(p1.isSuccessful) {
-                                //NECESITO UN GET DE LOGIN QUE ME RETORNE EL ACCESS Y EL TYPE POR ESTE CODIGO
                                 // TOKEN LOGIN
-                                //token = p1.body()!!
-                                Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN:GAAA, TYPE: GA"
-                                    , Toast.LENGTH_SHORT).show()
-                                //Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN: ${token.access_token}, TYPE:${token.token_type}"
+                                token = p1.body()!!
+                                //Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN:GAAA, TYPE: GA"
                                 //    , Toast.LENGTH_SHORT).show()
-                                //navigateBasedOnRole(rol)
+                                Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN: ${token.access_token}, TYPE:${token.token_type}"
+                                    , Toast.LENGTH_SHORT).show()
+
+                                val verifyTokenRequest = VerifyToken (token.access_token)
+                                val verifyRequest = userService.postVerifyToken(verifyTokenRequest)
+
+                                verifyRequest.enqueue(object :Callback<VerifyToken>{
+                                    override fun onResponse(
+                                        p0: Call<VerifyToken>,
+                                        p1: Response<VerifyToken>
+                                    ) {
+                                        if(p1.isSuccessful) {
+                                            //TENGO QUE CREAR UN GET DATA DEL VERIIFY QUE ME GUARDE LA DATA
+                                            vTokenData = p1.body()!!
+                                        }else {
+                                            Toast.makeText(this@IniciarSesion, "Error al obtener datos de verifyToken", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+
+                                    override fun onFailure(p0: Call<VerifyToken>, p1: Throwable) {
+                                        TODO("Not yet implemented")
+                                    }
+                                })
+
                             } else { Toast.makeText(this@IniciarSesion, "Error al obtener token", Toast.LENGTH_SHORT).show()
                             }
                         }
