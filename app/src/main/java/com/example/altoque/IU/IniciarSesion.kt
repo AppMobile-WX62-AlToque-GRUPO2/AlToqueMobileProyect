@@ -100,14 +100,16 @@ class IniciarSesion : AppCompatActivity() {
                                 Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN: ${token.access_token}, TYPE:${token.token_type}"
                                     , Toast.LENGTH_SHORT).show()
 
-                                val verifyTokenRequest = VerifyToken (token.access_token)
-                                val verifyRequest = userService.postVerifyToken(verifyTokenRequest)
+                                //val verifyTokenRequest = VerifyToken (token.access_token)
+                                //val verifyRequest = userService.postVerifyToken(verifyTokenRequest)
+                                val fTokenRequest = Login(email, rol, password)
+                                val verifyRequest = userService.postToken(fTokenRequest)
 
-                                verifyRequest.enqueue(object :Callback<VerifyToken>{
-                                    override fun onResponse(p0: Call<VerifyToken>, p1: Response<VerifyToken>) {
+                                verifyRequest.enqueue(object :Callback<Login>{
+                                    override fun onResponse(p0: Call<Login>, p1: Response<Login>) {
                                         if(p1.isSuccessful) {
 
-                                            val getVerifyRequest = userService.getUserDataInfo()
+                                            val getVerifyRequest = userService.getDataInf()
                                             getVerifyRequest.enqueue(object:Callback<VTokenData>{
                                                 override fun onResponse(p0: Call<VTokenData>, p1: Response<VTokenData>) {
                                                     if(p1.isSuccessful) {
@@ -133,7 +135,7 @@ class IniciarSesion : AppCompatActivity() {
                                         }
                                     }
 
-                                    override fun onFailure(p0: Call<VerifyToken>, p1: Throwable) {
+                                    override fun onFailure(p0: Call<Login>, p1: Throwable) {
                                         TODO("Not yet implemented")
                                     }
                                 })

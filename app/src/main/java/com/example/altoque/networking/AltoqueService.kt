@@ -21,10 +21,16 @@ interface AltoqueService {
     @GET("/auth/token_info")
     fun getTokenInfo(): Call<TokenLogin>
 
-    @POST("/auth/verify/token")
-    fun postVerifyToken(@Body verifyToken: VerifyToken): Call<VerifyToken>
+//    @POST("/auth/verify/token")
+//    fun postVerifyToken(@Body verifyToken: VerifyToken): Call<VerifyToken>
+//
+//    @GET("/auth/user/data")
+//    fun getUserDataInfo(): Call<VTokenData>
 
-    @GET("/auth/user/data")
-    fun getUserDataInfo(): Call<VTokenData>
+    @POST("/auth/verificar_token")
+    fun postToken(@Body login: Login): Call<Login>
+
+    @GET("/auth/verificar_token")
+    fun getDataInf(): Call<VTokenData>
 
 }
