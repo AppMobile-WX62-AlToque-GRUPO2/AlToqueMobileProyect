@@ -8,13 +8,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.altoque.R
 import com.example.altoque.models.Login
-import com.example.altoque.models.Notification
-import com.example.altoque.models.Register
 import com.example.altoque.models.TokenLogin
 import com.example.altoque.models.VTokenData
 import com.example.altoque.models.VerifyToken
@@ -25,12 +22,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.await
 import retrofit2.converter.gson.GsonConverterFactory
 
 class IniciarSesion : AppCompatActivity() {
     lateinit var token : TokenLogin
     lateinit var vTokenData : VTokenData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -48,9 +45,6 @@ class IniciarSesion : AppCompatActivity() {
         val tvRegistrate = findViewById<TextView>(R.id.tvRegistrate)
 
         var rol: Boolean? = null
-
-        // SharedPreferences para guardar el userId del VerifyToken
-        val sharedPreference = SharedPreferences(this)
 
         btIniciarSesion.setOnClickListener {
             validacion_iniciarSesion(rol)
@@ -92,6 +86,8 @@ class IniciarSesion : AppCompatActivity() {
 
         val tokenRequest = userService.getTokenInfo()
 
+        val sharedPreference = SharedPreferences(this)
+
         userRequest.enqueue(object : Callback<Login> {
             override fun onResponse(call: Call<Login>, response: Response<Login>) {
                 if(response.isSuccessful) {
@@ -101,8 +97,6 @@ class IniciarSesion : AppCompatActivity() {
                             if(p1.isSuccessful) {
                                 // TOKEN LOGIN
                                 token = p1.body()!!
-                                //Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN:GAAA, TYPE: GA"
-                                //    , Toast.LENGTH_SHORT).show()
                                 Toast.makeText(this@IniciarSesion, "ACCESS_TOKEN: ${token.access_token}, TYPE:${token.token_type}"
                                     , Toast.LENGTH_SHORT).show()
 
@@ -110,15 +104,32 @@ class IniciarSesion : AppCompatActivity() {
                                 val verifyRequest = userService.postVerifyToken(verifyTokenRequest)
 
                                 verifyRequest.enqueue(object :Callback<VerifyToken>{
-                                    override fun onResponse(
-                                        p0: Call<VerifyToken>,
-                                        p1: Response<VerifyToken>
-                                    ) {
+                                    override fun onResponse(p0: Call<VerifyToken>, p1: Response<VerifyToken>) {
                                         if(p1.isSuccessful) {
-                                            //TENGO QUE CREAR UN GET DATA DEL VERIIFY QUE ME GUARDE LA DATA
-                                            vTokenData = p1.body()!!
+
+                                            val getVerifyRequest = userService.getUserDataInfo()
+                                            getVerifyRequest.enqueue(object:Callback<VTokenData>{
+                                                override fun onResponse(p0: Call<VTokenData>, p1: Response<VTokenData>) {
+                                                    if(p1.isSuccessful) {
+                                                        vTokenData = p1.body()!!
+
+                                                        sharedPreference.saveData("UserData", vTokenData)
+                                                        val datosUser = sharedPreference.getData("UserData")
+                                                        if (datosUser != null) {
+                                                            Toast.makeText(this@IniciarSesion, "Role User: ${datosUser.role}, UserID: ${datosUser.id}", Toast.LENGTH_SHORT).show()
+                                                        }
+                                                        navigateBasedOnRole(rol)
+                                                    } else {
+                                                        Toast.makeText(this@IniciarSesion, "Arregla tu wnd dedatos", Toast.LENGTH_SHORT).show()
+                                                    }
+                                                }
+                                                override fun onFailure(p0: Call<VTokenData>, p1: Throwable) {
+                                                    TODO("Not yet implemented")
+                                                }
+                                            })
+
                                         }else {
-                                            Toast.makeText(this@IniciarSesion, "Error al obtener datos de verifyToken", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(this@IniciarSesion, "Error al obtener datos de verifyToken ZZZZZZ", Toast.LENGTH_SHORT).show()
                                         }
                                     }
 

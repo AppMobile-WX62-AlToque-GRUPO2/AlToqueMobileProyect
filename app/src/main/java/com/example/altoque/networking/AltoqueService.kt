@@ -3,6 +3,7 @@ package com.example.altoque.networking
 import com.example.altoque.models.Login
 import com.example.altoque.models.Register
 import com.example.altoque.models.TokenLogin
+import com.example.altoque.models.VTokenData
 import com.example.altoque.models.VerifyToken
 import retrofit2.Call
 import retrofit2.http.Body
@@ -22,4 +23,8 @@ interface AltoqueService {
 
     @POST("/auth/verify/token")
     fun postVerifyToken(@Body verifyToken: VerifyToken): Call<VerifyToken>
+
+    @GET("/auth/user/data")
+    fun getUserDataInfo(): Call<VTokenData>
+
 }
