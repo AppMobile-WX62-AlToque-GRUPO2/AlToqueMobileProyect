@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".IU.PublicationsList">
 
     <TextView
@@ -57,11 +58,11 @@
         android:layout_height="60dp"
         android:layout_marginTop="36dp"
         android:background="@android:color/transparent"
-        app:srcCompat="@drawable/baseline_arrow_back_ios_24"
         app:layout_constraintBottom_toTopOf="@+id/rvPublication"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
