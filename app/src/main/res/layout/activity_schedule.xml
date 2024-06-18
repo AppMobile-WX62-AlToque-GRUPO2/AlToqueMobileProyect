@@ -29,11 +29,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleScheduleCreation">
-        
+
         <EditText
             android:id="@+id/etDatePostCreation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#E4E4E4"
             android:ems="10"
             android:hint="@string/prototype_datetime_date"
             android:inputType="date"
@@ -51,11 +52,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
-        
+
         <EditText
             android:id="@+id/etStartTimePostCreation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#E4E4E4"
             android:ems="10"
             android:hint="@string/schedule_creation_hint_starttime"
             android:inputType="time"
@@ -73,11 +75,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
-        
+
         <EditText
             android:id="@+id/etEndTimePostCreation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#E4E4E4"
             android:ems="10"
             android:hint="@string/schedule_creation_hint_endtime"
             android:inputType="time"

@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".IU.SpecialistDetail">
 
     <TextView
@@ -49,6 +50,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         android:text="Rating"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/ivEspecialistImage"
         app:layout_constraintTop_toBottomOf="@+id/tvEspecialistEspacialidad" />
@@ -60,6 +62,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         android:text="Especialidad"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/ivEspecialistImage"
         app:layout_constraintTop_toBottomOf="@+id/tvEspecialistName" />
@@ -70,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="56dp"
-        android:backgroundTint="#282E67"
+        android:backgroundTint="#FFB800"
         android:text="Contactar"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +99,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="4dp"
         android:text="Descripcion wa"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEspecialistDescriptionTittle" />
 
@@ -106,6 +110,7 @@
         android:layout_marginStart="144dp"
         android:layout_marginEnd="137dp"
         android:layout_marginBottom="216dp"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,6 +124,7 @@
         android:layout_marginStart="133dp"
         android:layout_marginEnd="134dp"
         android:layout_marginBottom="181dp"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
