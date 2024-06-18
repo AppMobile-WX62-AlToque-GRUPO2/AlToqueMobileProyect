@@ -137,7 +137,7 @@ class MenuCustomerActivity : AppCompatActivity(), OnItemClickListenerPost {
         val tvPosts = findViewById<LinearLayout>(R.id.ivMyClientPosts)
 
         tvPosts.setOnClickListener {
-            startActivity(Intent(this, PublicationList::class.java))
+            startActivity(Intent(this, PublicationsList::class.java))
         }
     }
 
