@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,9 +42,6 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
         setContentView(R.layout.activity_detail_publication)
 
         findViewById<ImageButton>(R.id.ibDetailPublicationBack).setOnClickListener {
-            onBackPressed()
-        }
-        findViewById<Button>(R.id.btnDetailPublicationCancelar).setOnClickListener {
             onBackPressed()
         }
 
@@ -114,7 +112,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
                                                                                     }
 
                                                                                     override fun onFailure(call: Call<Profession>, t: Throwable) {
-                                                                                        Log.e("DetailPublication", "Profession request failed", t)
+                                                                                        Toast.makeText(this@DetailPublication, "Error al cargar la profesión", Toast.LENGTH_SHORT).show()
                                                                                     }
                                                                                 })
                                                                             } else {
@@ -127,7 +125,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
                                                                 }
 
                                                                 override fun onFailure(call: Call<User>, t: Throwable) {
-                                                                    Log.e("DetailPublication", "User request failed", t)
+                                                                    Toast.makeText(this@DetailPublication, "Error al cargar el usuario", Toast.LENGTH_SHORT).show()
                                                                 }
                                                             })
                                                         }
@@ -135,7 +133,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
                                                 }
 
                                                 override fun onFailure(call: Call<Specialist>, t: Throwable) {
-                                                    Log.e("DetailPublication", "Specialist request failed", t)
+                                                    Toast.makeText(this@DetailPublication, "Error al cargar el especialista", Toast.LENGTH_SHORT).show()
                                                 }
                                             })
                                         }
@@ -143,17 +141,17 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
                                 }
 
                                 override fun onFailure(call: Call<AvailableDate>, t: Throwable) {
-                                    Log.e("DetailPublication", "AvailableDate request failed", t)
+                                    Toast.makeText(this@DetailPublication, "Error al cargar la fecha disponible", Toast.LENGTH_SHORT).show()
                                 }
                             })
                         }
                     } else {
-                        Log.e("DetailPublication", "Error in response: ${response.code()} - ${response.message()}")
+                        Toast.makeText(this@DetailPublication, "Error al cargar los contratos", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<List<Contract>>, t: Throwable) {
-                    Log.e("DetailPublication", "Request failed", t)
+                    Toast.makeText(this@DetailPublication, "Error al cargar los contratos", Toast.LENGTH_SHORT).show()
                 }
             })
         } else {
@@ -165,11 +163,11 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
     }
 
     override fun onAcceptClicked(especialist: User) {
-        Log.d("DetailPublication", "Especialist accepted: ${especialist.firstName} ${especialist.lastName}")
+        Toast.makeText(this, "Especialista aceptado", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDeleteClicked(especialist: User) {
-        Log.d("DetailPublication", "Especialist deleted: ${especialist.firstName} ${especialist.lastName}")
+        Toast.makeText(this, "Especialista eliminado", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSpecialistClicked(especialist: User) {

@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/logo" />
 
         <Button
             android:id="@+id/btnVerMas"
@@ -78,7 +78,7 @@
             android:id="@+id/ibDeleteContractEspecialistProposal"
             android:layout_width="46dp"
             android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="28dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -86,17 +86,6 @@
             app:srcCompat="@drawable/baseline_delete_icon"
             app:tint="#FFFFFF" />
 
-
-        <ImageButton
-            android:id="@+id/ibEditPublication"
-            android:layout_width="46dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="4dp"
-            android:backgroundTint="#00050505"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ibDeleteContractEspecialistProposal"
-            app:srcCompat="@drawable/baseline_edit_icon"
-            app:tint="#FFFFFF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -52,15 +52,6 @@
             android:name=".IU.MenuCustomerActivity"
             android:exported="false" />
         <activity
-            android:name=".IU.PublicationDetailEspecialist"
-            android:exported="false" />
-        <activity
-            android:name=".IU.PublicationDetail"
-            android:exported="false" />
-        <activity
-            android:name=".IU.PublicationList"
-            android:exported="false" />
-        <activity
             android:name=".IU.SpecialistProfileActivity"
             android:exported="false" />
         <activity

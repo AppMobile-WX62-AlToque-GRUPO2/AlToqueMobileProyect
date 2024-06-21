@@ -3,6 +3,7 @@ package com.example.altoque.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +36,7 @@ class PrototypePublication(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvPubDesc = itemView.findViewById<TextView>(R.id.tvPublicationDescription)
     var ivPub = itemView.findViewById<ImageView>(R.id.ivPublication)
     var btnVerMas = itemView.findViewById<TextView>(R.id.btnVerMas)
-
+    var btnDelete = itemView.findViewById<ImageButton>(R.id.ibDeleteContractEspecialistProposal)
     fun bind(publication : Publication, itemClickListener : OnItemClickListener ){
         tvPubTitle.text = publication.title
         tvPubDesc.text = publication.address
@@ -45,9 +46,14 @@ class PrototypePublication(itemView: View) : RecyclerView.ViewHolder(itemView) {
         btnVerMas.setOnClickListener {
             itemClickListener.onItemClicked(publication)
         }
+
+        btnDelete.setOnClickListener {
+            itemClickListener.onItemDeleteClicked(publication)
+        }
     }
 }
 
 interface OnItemClickListener {
     fun onItemClicked(publication : Publication)
+    fun onItemDeleteClicked(publication: Publication)
 }

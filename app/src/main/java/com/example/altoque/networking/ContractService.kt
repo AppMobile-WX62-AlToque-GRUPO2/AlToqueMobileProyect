@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface ContractService {
 
-    @GET("posts")//CAMBIAR A contracts :V
+    @GET("posts")
     suspend fun getAll(): Response<List<Contract>>
 
     @GET("contracts")
