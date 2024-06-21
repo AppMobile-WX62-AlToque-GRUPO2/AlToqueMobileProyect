@@ -44,7 +44,7 @@ class PublicationsList : AppCompatActivity(), OnItemClickListener {
 
     private fun loadPublications() {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8001/")  // Para emulador
+            .baseUrl("https://altoquebackendapi.onrender.com/")  // Para emulador
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

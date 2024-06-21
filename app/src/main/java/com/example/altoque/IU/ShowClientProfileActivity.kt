@@ -3,6 +3,7 @@ package com.example.altoque.IU
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.altoque.R
+import com.example.altoque.models.Login
 import com.example.altoque.networking.ClientService
 import com.example.altoque.networking.UbicationService
 import com.example.altoque.networking.UserService
