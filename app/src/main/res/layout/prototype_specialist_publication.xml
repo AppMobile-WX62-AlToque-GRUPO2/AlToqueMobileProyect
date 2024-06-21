@@ -16,6 +16,24 @@
         android:background="#E0E0E0"
         android:padding="16dp">
 
+        <Button
+            android:id="@+id/btnVerMasSpecialistPublication"
+            android:layout_width="93dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#FFD94D"
+            android:text="VER MÁS"
+            android:textColor="@color/white"
+            android:textColorLink="#FFFFFF"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tvPublicationEspecialistEmail"
+            app:layout_constraintTop_toBottomOf="@+id/tvPublicationEspecialistEmail"
+            app:layout_constraintVertical_bias="1.0" />
+
         <ImageView
             android:id="@+id/ivPublicationEspecialsitContractProposal"
             android:layout_width="55dp"
@@ -33,7 +51,6 @@
             android:layout_marginStart="8dp"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/ibAcceptContractEspecialistProposal"
             app:layout_constraintStart_toEndOf="@+id/ivPublicationEspecialsitContractProposal"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Nombre Completo: Mauricio Rosales" />
@@ -46,7 +63,6 @@
             android:layout_marginTop="8dp"
             android:textColor="#757575"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/ibAcceptContractEspecialistProposal"
             app:layout_constraintStart_toEndOf="@+id/ivPublicationEspecialsitContractProposal"
             app:layout_constraintTop_toBottomOf="@+id/tvPublicationEspecialistFullName"
             tools:text="Correo Electrónico: MauricioRosales1234@gmail.com" />
@@ -59,34 +75,10 @@
             android:layout_marginTop="8dp"
             android:textColor="#757575"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/ibAcceptContractEspecialistProposal"
             app:layout_constraintStart_toEndOf="@+id/ivPublicationEspecialsitContractProposal"
             app:layout_constraintTop_toBottomOf="@+id/tvPublicationEspecialistEmail"
-            tools:text="Número Telefónico: 123456789" />
+            tools:text="Número Telefónico: " />
 
-        <ImageButton
-            android:id="@+id/ibAcceptContractEspecialistProposal"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackground"
-            android:backgroundTint="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ibDeleteContractEspecialistProposal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/checkbox_on_background" />
-
-        <ImageButton
-            android:id="@+id/ibDeleteContractEspecialistProposal"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="#000000"
-            android:backgroundTint="#00B5B5B5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_delete"
-            app:tint="#000000" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,8 +1,10 @@
 package com.example.altoque.IU
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -23,6 +25,9 @@ class SpecialistDetail : AppCompatActivity() {
         val userWorkExperience = intent.getFloatExtra("USER_WORK_EXPERIENCE", 0.0f)
 
         val btnBack = findViewById<ImageButton>(R.id.imageButton)
+        val btnAccept = findViewById<Button>(R.id.btnAcceptSpecialist)
+        val btnDecline = findViewById<Button>(R.id.btnDeclineSpecialist)
+
 
         findViewById<TextView>(R.id.tvEspecialistName).text = userName
         findViewById<TextView>(R.id.tvEspecialistDescription).text = userDescription
@@ -33,6 +38,14 @@ class SpecialistDetail : AppCompatActivity() {
 
         btnBack.setOnClickListener {
             onBackPressed()
+        }
+
+        btnAccept.setOnClickListener {
+            Toast.makeText(this, "Aceptado", Toast.LENGTH_SHORT).show()
+        }
+
+        btnDecline.setOnClickListener {
+            Toast.makeText(this, "Rechazado", Toast.LENGTH_SHORT).show()
         }
     }
 }

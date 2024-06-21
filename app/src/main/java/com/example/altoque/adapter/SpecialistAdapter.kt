@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,13 +34,11 @@ class SpecialistAdapter(
     }
 
     class SpecialistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val fullNameTextView: TextView = itemView.findViewById(R.id.tvPublicationEspecialistFullName)
-        private val emailTextView: TextView = itemView.findViewById(R.id.tvPublicationEspecialistEmail)
-        private val phoneNumberTextView: TextView = itemView.findViewById(R.id.tvPublicationEspecialistNumber)
-        private val avatarImageView: ImageView = itemView.findViewById(R.id.ivPublicationEspecialsitContractProposal)
-        private val acceptButton: ImageButton = itemView.findViewById(R.id.ibAcceptContractEspecialistProposal)
-        private val deleteButton: ImageButton = itemView.findViewById(R.id.ibDeleteContractEspecialistProposal)
-        private val acceptProposal: ImageButton = itemView.findViewById(R.id.ibAcceptContractEspecialistProposal)
+        private val fullNameTextView = itemView.findViewById<TextView>(R.id.tvPublicationEspecialistFullName)
+        private val emailTextView = itemView.findViewById<TextView>(R.id.tvPublicationEspecialistEmail)
+        private val phoneNumberTextView = itemView.findViewById<TextView>(R.id.tvPublicationEspecialistNumber)
+        private val avatarImageView = itemView.findViewById<ImageView>(R.id.ivPublicationEspecialsitContractProposal)
+        private val seeMoreButton = itemView.findViewById<Button>(R.id.btnVerMasSpecialistPublication)
 
         @SuppressLint("SetTextI18n")
         fun bind(especialist: User, clickListener: OnSpecialistClickListener) {
@@ -49,15 +48,7 @@ class SpecialistAdapter(
 
             Glide.with(itemView).load(especialist.avatar).into(avatarImageView)
 
-            acceptButton.setOnClickListener {
-                clickListener.onAcceptClicked(especialist)
-            }
-
-            deleteButton.setOnClickListener {
-                clickListener.onDeleteClicked(especialist)
-            }
-
-            acceptProposal.setOnClickListener {
+            seeMoreButton.setOnClickListener {
                 clickListener.onSpecialistClicked(especialist)
             }
         }

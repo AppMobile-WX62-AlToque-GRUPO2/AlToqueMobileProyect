@@ -13,10 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="104dp"
-        android:text="Información detallada"
-        android:textColor="@color/black"
-        android:textSize="28sp"
+        android:layout_marginTop="80dp"
+        android:text="Información de especialista"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +52,7 @@
         android:layout_marginTop="4dp"
         android:text="Rating"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/ivEspecialistImage"
         app:layout_constraintTop_toBottomOf="@+id/tvEspecialistEspacialidad" />
 
@@ -63,18 +64,30 @@
         android:layout_marginTop="4dp"
         android:text="Especialidad"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/ivEspecialistImage"
         app:layout_constraintTop_toBottomOf="@+id/tvEspecialistName" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAcceptSpecialist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="18dp"
         android:backgroundTint="#FFB800"
-        android:text="Contactar"
+        android:text=" Aceptar"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEspecialistRating" />
+
+    <Button
+        android:id="@+id/btnDeclineSpecialist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="48dp"
+        android:backgroundTint="#D32F2F"
+        android:text="Rechazar"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEspecialistRating" />
@@ -99,6 +112,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="4dp"
         android:text="Descripcion wa"
+        android:textSize="16sp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEspecialistDescriptionTittle" />

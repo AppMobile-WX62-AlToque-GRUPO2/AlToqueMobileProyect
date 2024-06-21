@@ -20,6 +20,19 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
+        android:id="@+id/tvTitlePublicationDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
+        android:text="Detalle de la publicación"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvDetailPublicationTittle"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
@@ -79,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="44dp"
-        android:text="Profesionales que aceptaron"
+        android:text="Profesionales interesados"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -98,18 +111,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDetailPublicationProfesionesTittle" />
 
-    <Button
-        android:id="@+id/btnDetailPublicationCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#696969"
-        android:text="Cancelar"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvProfesionalesList" />
 
     <ImageButton
         android:id="@+id/ibDetailPublicationBack"
@@ -118,7 +119,7 @@
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_arrow_back_ios_24" />

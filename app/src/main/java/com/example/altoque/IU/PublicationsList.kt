@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -59,12 +60,12 @@ class PublicationsList : AppCompatActivity(), OnItemClickListener {
                     publicationAdapter = PublicationAdapter(publications, this@PublicationsList)
                     rvPublications.adapter = publicationAdapter
                 } else {
-                    Log.e("MainActivity", "Error en la respuesta: ${response.errorBody()?.string()}")
+                    Toast.makeText(this@PublicationsList, "Error en la respuesta: ${response.errorBody()?.string()}", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
-                Log.e("MainActivity", "Error: ${t.message}")
+                Toast.makeText(this@PublicationsList, "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -79,4 +80,35 @@ class PublicationsList : AppCompatActivity(), OnItemClickListener {
         }
         startActivity(intent)
     }
+
+    override fun onItemDeleteClicked(publication: Publication) {
+        deletePublication(publication)
+    }
+
+    private fun deletePublication(publication: Publication) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://altoquebackendapi.onrender.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(PublicationService::class.java)
+
+        val request = service.deletePublication(publication.id!!)
+
+        request.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    publications = publications.filter { it.id != publication.id }
+                    publicationAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(this@PublicationsList, "Error al eliminar la publicación", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@PublicationsList, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
 }
