@@ -12,13 +12,13 @@ import retrofit2.http.POST
 
 interface AltoqueService {
 
-    @POST("/auth/login")
+    @POST("/auth/auth/login")
     fun postLogin(@Body login: Login): Call<Login>
 
-    @POST("/auth/register")
+    @POST("/auth/auth/register")
     fun postRegister(@Body register: Register): Call<Register>
 
-    @GET("/auth/token_info")
+    @GET("/auth/auth/token_info")
     fun getTokenInfo(): Call<TokenLogin>
 
 //    @POST("/auth/verify/token")
@@ -27,10 +27,10 @@ interface AltoqueService {
 //    @GET("/auth/user/data")
 //    fun getUserDataInfo(): Call<VTokenData>
 
-    @POST("/auth/verificar_token")
+    @POST("/auth/auth/verificar_token")
     fun postToken(@Body login: Login): Call<Login>
 
-    @GET("/auth/verificar_token")
+    @GET("/auth/auth/verificar_token")
     fun getDataInf(): Call<VTokenData>
 
 }
