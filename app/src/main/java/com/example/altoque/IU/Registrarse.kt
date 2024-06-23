@@ -91,7 +91,7 @@ class Registrarse : AppCompatActivity() {
             override fun onResponse(p0: Call<Register>, response: Response<Register>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@Registrarse, "Se creo el usuario correctamente", Toast.LENGTH_SHORT).show()
-
+                    finish()
                 } else {
                     Toast.makeText(this@Registrarse,
                         "usuario: ${email},password: $password ,rol: $rol" +
