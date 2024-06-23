@@ -16,6 +16,7 @@ import com.example.altoque.models.Notification
 import com.example.altoque.networking.ClientService
 import com.example.altoque.networking.NotificationService
 import com.example.altoque.networking.SharedPreferences
+import com.example.altoque.networking.SpecialistService
 import com.example.altoque.networking.UserService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -80,12 +81,13 @@ class ClientNotification : AppCompatActivity()  {
 
         val clientService = retrofit.create(ClientService::class.java)
         val userService = retrofit.create(UserService::class.java)
+        val specialistService = retrofit.create(SpecialistService::class.java)
 
         lifecycleScope.launch {
             try {
-                val clientResponse = clientService.getClient(1)
+                val specialistResponse = specialistService.getSpecialist(2)
 
-                val userId = clientResponse.userId
+                val userId = specialistResponse.userId
                 val userResponse = userService.getUser(userId)
 
                 runOnUiThread {
