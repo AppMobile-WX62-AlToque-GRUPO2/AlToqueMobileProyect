@@ -88,7 +88,6 @@
                         android:id="@+id/tvSpePubDetIsPublish"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Hace 20 minutos"
                         android:textColor="@color/yellow" />
 
                 </LinearLayout>

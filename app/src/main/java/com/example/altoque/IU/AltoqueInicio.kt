@@ -21,7 +21,7 @@ class AltoqueInicio : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
             }
             override fun onFinish() {
-                val intent: Intent = Intent(this@AltoqueInicio, IniciarSesion::class.java)
+                val intent: Intent = Intent(this@AltoqueInicio, MenuExpertActivity::class.java)
                 startActivity(intent)
                 finish()
             }

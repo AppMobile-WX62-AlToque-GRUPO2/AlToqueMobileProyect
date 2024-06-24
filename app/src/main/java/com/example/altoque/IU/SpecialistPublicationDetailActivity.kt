@@ -101,7 +101,6 @@ class SpecialistPublicationDetailActivity : AppCompatActivity(), MessageFragment
         val tvTitle = findViewById<TextView>(R.id.tvSpePubDetTitle)
         val tvAddress = findViewById<TextView>(R.id.tvSpePubDetAddress)
         val ivImagePost = findViewById<ImageView>(R.id.ivSpePubDetPost)
-        val tvIsPublish = findViewById<TextView>(R.id.tvSpePubDetIsPublish)
         val tvDescription = findViewById<TextView>(R.id.tvSpePubDetDescription)
         val tvName = findViewById<TextView>(R.id.tvSpePubDetName)
         val tvEmail = findViewById<TextView>(R.id.tvSpePubDetEmail)
@@ -112,7 +111,6 @@ class SpecialistPublicationDetailActivity : AppCompatActivity(), MessageFragment
         tvAddress.text = post.address
         Picasso.get().load(post.image).into(ivImagePost)
 
-        if (post.is_publish) tvIsPublish.text = "Hace 20 minutos" else tvIsPublish.text = "Inactivo"
         tvDescription.text = post.description
         tvName.text = user.firstName + " " + user.lastName
         tvEmail.text = user.email

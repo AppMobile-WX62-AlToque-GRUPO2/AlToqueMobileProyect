@@ -75,8 +75,8 @@ class MenuExpertActivity : AppCompatActivity(), OnItemClickListenerPost {
                 val response = service.getAll()
                 if (response.isSuccessful) {
                     val publications = response.body() ?: emptyList()
-
-                    postAdapter = PostAdapter(publications, this@MenuExpertActivity)
+                    val limitedPublications = publications.take(4)
+                    postAdapter = PostAdapter(limitedPublications, this@MenuExpertActivity)
                     rvPublication.adapter = postAdapter
                     rvPublication.layoutManager = LinearLayoutManager(this@MenuExpertActivity)
                 } else {
