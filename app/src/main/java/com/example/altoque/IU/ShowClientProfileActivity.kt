@@ -42,6 +42,7 @@ class ShowClientProfileActivity : AppCompatActivity() {
         val datosUser = sharedPreference.getData("UserData")
         if (datosUser != null) {
             userId = datosUser.id
+            role = if (datosUser.role) 1 else 0
         } else {
             Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
         }
@@ -90,8 +91,22 @@ class ShowClientProfileActivity : AppCompatActivity() {
         // Regresar
         val btBack = findViewById<ImageButton>(R.id.btBackShowClientProfileActivity)
         btBack.setOnClickListener {
+            // Regresar al menu del cliente
             val intent = Intent(this, MenuCustomerActivity::class.java)
+            // Limpiar el stack de tareas
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
+            finish()
+        }
+
+        // Cerrar sesión
+        val btLogout = findViewById<Button>(R.id.btLogoutShowClientActivity)
+        btLogout.setOnClickListener {
+            val intent = Intent(this, IniciarSesion::class.java)
+            // Limpiar el stack de tareas
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+            finish()
         }
     }
 

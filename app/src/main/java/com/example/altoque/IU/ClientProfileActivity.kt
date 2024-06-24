@@ -75,6 +75,7 @@ class clientProfileActivity : AppCompatActivity() {
         val datosUser = sharedPreference.getData("UserData")
         if (datosUser != null) {
             userId = datosUser.id
+            role = if (datosUser.role) 1 else 0
         } else {
             Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
         }
@@ -278,7 +279,10 @@ class clientProfileActivity : AppCompatActivity() {
             dialog.dismiss()
             // Regresar al perfil del cliente después de la confirmación
             val intent = Intent(this, ShowClientProfileActivity::class.java)
+            // Limpiar el stack de tareas
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
+            finish()
         }
         builder.show()
     }
