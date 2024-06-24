@@ -75,6 +75,7 @@ class clientProfileActivity : AppCompatActivity() {
         val datosUser = sharedPreference.getData("UserData")
         if (datosUser != null) {
             userId = datosUser.id
+            role = if (datosUser.role) 1 else 0
         } else {
             Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
         }
