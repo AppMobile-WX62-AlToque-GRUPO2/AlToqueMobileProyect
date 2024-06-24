@@ -35,7 +35,7 @@ class Registrarse : AppCompatActivity() {
         val btEspecialista = findViewById<Button>(R.id.btEspecialista)
 
         val tvIniciarSesion = findViewById<TextView>(R.id.tvIniciarSesion)
-        var rol: Boolean = true
+        var rol = true
 
         btRegistrarme.setOnClickListener {
             registro(rol)
@@ -81,8 +81,9 @@ class Registrarse : AppCompatActivity() {
 
         val userService = retrofit.create(AltoqueService::class.java)
         val registerRequest = Register(email, password, rol,
-            "Carlos","Onofre","933373674",
-            "16-10-2003","aea", "Soy inge de soft",3,1)
+            "","","",
+            "9999-12-30","",
+            "",0,1)
         val userRequest = userService.postRegister(registerRequest)
 
 
@@ -90,18 +91,17 @@ class Registrarse : AppCompatActivity() {
             override fun onResponse(p0: Call<Register>, response: Response<Register>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@Registrarse, "Se creo el usuario correctamente", Toast.LENGTH_SHORT).show()
-
+                    finish()
                 } else {
-                    /*
                     Toast.makeText(this@Registrarse,
                         "usuario: ${email},password: $password ,rol: $rol" +
                                 ",firstname: ${registerRequest.firstName} ,LastName: ${registerRequest.lastName}" +
                                 ",phone: ${registerRequest.phone},hb: ${registerRequest.birthdate}" +
                                 ",avatar: ${registerRequest.avatar},descrip: ${registerRequest.description} " +
                                 ",rating: ${registerRequest.rating},idUbication: ${registerRequest.ubicationId}", Toast.LENGTH_SHORT).show()
-                    */
-                    val errorBody = response.errorBody()?.string()
-                    Toast.makeText(this@Registrarse, "Error al registrar usuario: $errorBody", Toast.LENGTH_SHORT).show()
+
+                    //val errorBody = response.errorBody()?.string()
+                    //Toast.makeText(this@Registrarse, "Error al registrar usuario: $errorBody", Toast.LENGTH_SHORT).show()
                 }
             }
 
