@@ -22,7 +22,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.altoque.R
 import com.example.altoque.models.Post
 import com.example.altoque.models.User
+import com.example.altoque.networking.AvailableDateService
 import com.example.altoque.networking.ClientService
+import com.example.altoque.networking.ContractService
 import com.example.altoque.networking.PostService
 import com.example.altoque.networking.RetrofitClient
 import com.example.altoque.networking.UserService
@@ -89,6 +91,8 @@ class SpecialistPublicationDetailActivity : AppCompatActivity(), MessageFragment
         val postService = RetrofitClient.createService<PostService>()
         val clientService = RetrofitClient.createService<ClientService>()
         val userService = RetrofitClient.createService<UserService>()
+        //val availableDateService = RetrofitClient.createService<AvailableDateService>()
+        //val contractService = RetrofitClient.createService<ContractService>()
 
         lifecycleScope.launch {
             try {

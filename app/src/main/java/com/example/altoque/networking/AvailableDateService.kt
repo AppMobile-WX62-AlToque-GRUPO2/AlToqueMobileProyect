@@ -7,7 +7,5 @@ import retrofit2.http.Path
 
 interface AvailableDateService {
     @GET("availableDates/{id}")
-    fun getAvailableDateById(
-        @Path("id") id: Int
-    ): Call<AvailableDate>
+    fun getAvailableDateById(@Path("id") id: Int): Call<AvailableDate>
 }

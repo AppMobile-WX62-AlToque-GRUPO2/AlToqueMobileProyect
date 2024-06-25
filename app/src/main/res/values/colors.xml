@@ -7,6 +7,7 @@
     <color name="gray_dark">#DC202020</color>
 
     <color name="in_progress">#258FB0</color>
+    <color name="rejected">#E21414</color>
     <color name="accepted">#24D540</color>
     <color name="finished">#1435E2</color>
 
