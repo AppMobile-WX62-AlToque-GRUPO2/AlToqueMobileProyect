@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.altoque.R
 import com.example.altoque.models.Schedule
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ScheduleAdapter(var schedules : List<Schedule>) : Adapter<SchedulePrototype>() {
+class ScheduleAdapter(var schedules : List<Schedule>, var itemDeleteClickListener: OnItemDeleteClickListener) : Adapter<SchedulePrototype>() {
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SchedulePrototype {
         var view = LayoutInflater
@@ -23,7 +24,7 @@ class ScheduleAdapter(var schedules : List<Schedule>) : Adapter<SchedulePrototyp
     }
     
     override fun onBindViewHolder(holder: SchedulePrototype, position: Int) {
-        holder.bind(schedules.get(position))
+        holder.bind(schedules.get(position), itemDeleteClickListener)
     }
     
     override fun getItemCount(): Int {
@@ -36,8 +37,9 @@ class SchedulePrototype(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var etDatePost = itemView.findViewById<EditText>(R.id.etDatePost)
     var etStartTimePostProto = itemView.findViewById<EditText>(R.id.etStartTimePostProto)
     var etEndTimePostProto = itemView.findViewById<EditText>(R.id.etEndTimePostProto)
+    var fabDelete = itemView.findViewById<FloatingActionButton>(R.id.fabDeleteScheduleProto)
     
-    fun bind(schedule: Schedule){
+    fun bind(schedule: Schedule, itemDeleteClickListener: OnItemDeleteClickListener){
         // Define the date format
         //val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         // Convert the Date to String
@@ -49,7 +51,7 @@ class SchedulePrototype(itemView: View) : RecyclerView.ViewHolder(itemView) {
         
         val editableDate = Editable.Factory.getInstance().newEditable(schedule.fecha)
         etDatePost.text = editableDate
-        
+
         //val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         //val timeString = timeFormat.format(schedule.hora)
         //val editableTime = Editable.Factory.getInstance().newEditable(timeString)
@@ -60,6 +62,14 @@ class SchedulePrototype(itemView: View) : RecyclerView.ViewHolder(itemView) {
         
         val editableEndTime = Editable.Factory.getInstance().newEditable(schedule.horafin)
         etEndTimePostProto.text = editableEndTime
+
+        fabDelete.setOnClickListener {
+            itemDeleteClickListener.onItemClicked(schedule)
+        }
     }
     
+}
+
+interface OnItemDeleteClickListener {
+    fun onItemClicked(schedule: Schedule)
 }

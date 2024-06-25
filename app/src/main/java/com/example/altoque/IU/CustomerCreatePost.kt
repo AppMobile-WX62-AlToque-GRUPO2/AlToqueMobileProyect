@@ -17,13 +17,17 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.altoque.R
 import com.example.altoque.models.PostResponse
 import com.example.altoque.models.PostUpload
+import com.example.altoque.networking.ClientService
 import com.example.altoque.networking.PostService
+import com.example.altoque.networking.SharedPreferences
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +41,10 @@ class CustomerCreatePost : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
     private lateinit var storageRef: StorageReference
     private var isUploadingImage = false
+
+    private var userId = -1
+    private var role = -1
+    private var clientId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +78,20 @@ class CustomerCreatePost : AppCompatActivity() {
                     isUploadingImage = false // Habilitar el botón después de la actualización
                 }
             }
+        }
+
+        val btCancel = findViewById<Button>(R.id.btCancelPost)
+        btCancel.setOnClickListener {
+            redirectToHome()
+        }
+
+        val sharedPreference = SharedPreferences(this)
+        val datosUser = sharedPreference.getData("UserData")
+        if (datosUser != null) {
+            userId = datosUser.id
+            role = if (datosUser.role) 1 else 0
+        } else {
+            Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -146,38 +168,58 @@ class CustomerCreatePost : AppCompatActivity() {
 
         val service = retrofit.create(PostService::class.java)
 
-        val clientId = 1
-        val is_publish = true
+        val serviceClient = retrofit.create(ClientService::class.java)
 
-        val etTitle = findViewById<TextInputEditText>(R.id.etTitle)
-        val etDesc = findViewById<TextInputEditText>(R.id.etDesc)
-        val etDistrict = findViewById<TextInputEditText>(R.id.etDistrict)
+        lifecycleScope.launch {
+            val clientResponse = serviceClient.getClientIdByUserAndRole(userId, role.toString())
 
-        val title = etTitle.text.toString()
-        val desc = etDesc.text.toString()
-        val district = etDistrict.text.toString()
-
-        val post = PostUpload(title, desc, district, imageUrl ?: "", is_publish, clientId)
-
-        val request = service.insertPost(post)
-
-        request.enqueue(object : Callback<PostResponse> {
-            override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(this@CustomerCreatePost, "Publicación creada correctamente", Toast.LENGTH_LONG).show()
-                    redirectToHome()
-                } else {
-                    Toast.makeText(this@CustomerCreatePost, "Error al crear la publicación", Toast.LENGTH_LONG).show()
+            if (clientResponse.isSuccessful) {
+                val clientIdResponse = clientResponse.body()
+                if (clientIdResponse != null) {
+                    clientId = clientIdResponse.client_id
                 }
             }
 
-            override fun onFailure(call: Call<PostResponse>, t: Throwable) {
-                Toast.makeText(this@CustomerCreatePost, "Error de red: ${t.message}", Toast.LENGTH_LONG).show()
-            }
-        })
+            val clientId = clientId
+            val is_publish = true
+
+            val etTitle = findViewById<TextInputEditText>(R.id.etTitle)
+            val etDesc = findViewById<TextInputEditText>(R.id.etDesc)
+            val etDistrict = findViewById<TextInputEditText>(R.id.etDistrict)
+
+            val title = etTitle.text.toString()
+            val desc = etDesc.text.toString()
+            val district = etDistrict.text.toString()
+
+            val post = PostUpload(title, desc, district, imageUrl ?: "", is_publish, clientId)
+
+            val request = service.insertPost(post)
+
+            request.enqueue(object : Callback<PostResponse> {
+                override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@CustomerCreatePost, "Publicación creada correctamente", Toast.LENGTH_LONG).show()
+                        redirectToSchedule()
+                    } else {
+                        Toast.makeText(this@CustomerCreatePost, "Error al crear la publicación", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<PostResponse>, t: Throwable) {
+                    Toast.makeText(this@CustomerCreatePost, "Error de red: ${t.message}", Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+
+
     }
 
     private fun redirectToHome() {
+        val intent = Intent(this, MenuCustomerActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun redirectToSchedule() {
         val intent = Intent(this, ScheduleListActivity::class.java)
         startActivity(intent)
     }

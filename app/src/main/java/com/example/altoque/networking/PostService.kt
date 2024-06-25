@@ -25,7 +25,7 @@ interface PostService {
     suspend fun getById(@Path("id") id: String): Response<Post>
     
     @GET("posts")
-    fun getAllPosts(): Call<List<PostResponse>>
+    suspend fun getAllPosts(): Response<List<PostResponse>>
     
     @GET("posts/{post_id}")
     fun getPostById(@Path("post_id") postId: Int): Call<PostResponse>
