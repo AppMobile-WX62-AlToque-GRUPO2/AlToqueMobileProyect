@@ -144,6 +144,4 @@ class MenuCustomerActivity : AppCompatActivity(), OnItemClickListenerPost {
     override fun onItemClicked(post: Post) {
         TODO("Not yet implemented")
     }
-
-
 }

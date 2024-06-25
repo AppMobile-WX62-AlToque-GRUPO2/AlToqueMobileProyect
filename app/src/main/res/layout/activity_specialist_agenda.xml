@@ -19,6 +19,7 @@
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_arrow_back_ios_24"
         app:title="Agenda" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -68,14 +68,17 @@ class SpecialistServicesActivity : AppCompatActivity(), OnItemClickListenerPost 
         }
     }
 
-    override fun onItemClicked(post: Post) {
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 
+    override fun onItemClicked(post: Post) {
         val intent = Intent(this, SpecialistPublicationDetailActivity::class.java)
         intent.putExtra("ID_POST", post.id.toString())
         startActivity(intent)
     }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    override fun onDestroy() {
+        super.onDestroy()
+        postAdapter.cancelUpdates() // Llama a cancelUpdates del adaptador
     }
 }

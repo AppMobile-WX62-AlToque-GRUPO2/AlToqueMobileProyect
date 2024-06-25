@@ -11,11 +11,14 @@ import retrofit2.http.Query
 
 interface ContractService {
 
-    @GET("posts")
+    @GET("contracts")
     suspend fun getAll(): Response<List<Contract>>
 
     @GET("contracts")
     fun getContractsByState(@Query("state") state: Int): Call<List<Contract>>
+
+    @PUT("contracts/{id}")
+    suspend fun updateContract(@Path("id") id: Int, @Body contract: Contract): Response<Contract>
 
     @PUT("contracts/{id}")
     fun updateContractState(@Path("id") id: Int, @Body contract: Contract): Call<Contract>
