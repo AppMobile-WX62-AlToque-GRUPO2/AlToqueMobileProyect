@@ -85,11 +85,7 @@ class ClientNotification : AppCompatActivity()  {
 
         lifecycleScope.launch {
             try {
-                val specialistResponse = specialistService.getSpecialist(2)
-
-                val userId = specialistResponse.userId
                 val userResponse = userService.getUser(userId)
-
                 runOnUiThread {
                     val rvNotiImage = findViewById<ImageView>(R.id.rvNotiImage)
                     if (userResponse.avatar != null) {
@@ -98,7 +94,7 @@ class ClientNotification : AppCompatActivity()  {
                             .placeholder(R.drawable.default_user)
                             .into(rvNotiImage)
                     } else {
-                        //Si no hay imagen se le da una imagen default
+                        // If no image is available, set a default image
                         rvNotiImage.setImageResource(R.drawable.default_user)
                     }
                 }
