@@ -36,6 +36,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
     var professionals: MutableList<User> = mutableListOf()
     var userProfessionMap: MutableMap<Int, String> = mutableMapOf()
     var specialistWorkExperienceMap: MutableMap<Int, Float> = mutableMapOf()
+    var contractIdMap: MutableMap<Int, Int> = mutableMapOf() // Mapa para almacenar contractId
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +106,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
                                                                                             profession?.let {
                                                                                                 userProfessionMap[user.id] = it.name
                                                                                                 specialistWorkExperienceMap[user.id] = specialist.workExperience
+                                                                                                contractIdMap[user.id] = contract.id // Almacenar contractId
                                                                                                 professionals.add(user)
                                                                                                 professionalAdapter.notifyDataSetChanged()
                                                                                             }
@@ -117,6 +119,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
                                                                                 })
                                                                             } else {
                                                                                 specialistWorkExperienceMap[user.id] = specialist.workExperience
+                                                                                contractIdMap[user.id] = contract.id // Almacenar contractId
                                                                                 professionals.add(user)
                                                                                 professionalAdapter.notifyDataSetChanged()
                                                                             }
@@ -173,6 +176,8 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
     override fun onSpecialistClicked(especialist: User) {
         val profession = userProfessionMap[especialist.id] ?: "N/A"
         val workExperience = specialistWorkExperienceMap[especialist.id] ?: 0f
+        val contractId = contractIdMap[especialist.id] ?: -1
+
         val intent = Intent(this, SpecialistDetail::class.java).apply {
             putExtra("USER_NAME", "${especialist.firstName} ${especialist.lastName}")
             putExtra("USER_EMAIL", especialist.email)
@@ -181,6 +186,7 @@ class DetailPublication : AppCompatActivity(), OnSpecialistClickListener {
             putExtra("USER_DESCRIPTION", especialist.description)
             putExtra("USER_PROFESSION", profession)
             putExtra("USER_WORK_EXPERIENCE", workExperience)
+            putExtra("CONTRACT_ID", contractId)
         }
         startActivity(intent)
     }
