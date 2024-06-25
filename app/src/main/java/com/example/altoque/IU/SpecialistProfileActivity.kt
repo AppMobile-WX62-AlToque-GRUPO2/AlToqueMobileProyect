@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -26,6 +27,7 @@ import com.example.altoque.models.Specialist
 import com.example.altoque.models.Ubication
 import com.example.altoque.models.UpdateUserRequest
 import com.example.altoque.networking.ProfessionService
+import com.example.altoque.networking.SharedPreferences
 import com.example.altoque.networking.SpecialistService
 import com.example.altoque.networking.UbicationService
 import com.example.altoque.networking.UserService
@@ -44,6 +46,7 @@ class SpecialistProfileActivity : AppCompatActivity() {
     // IDs de cliente, usuario, ubicación y distrito
     private var specialistId = 1
     private var userId = 1
+    private var role = 1
     private var ubicationId = 1
     private var professionId = 1
     private var districtId = 2
@@ -68,8 +71,21 @@ class SpecialistProfileActivity : AppCompatActivity() {
             insets
         }
 
+
         // Inicializar referencia de almacenamiento de Firebase
         storageRef = FirebaseStorage.getInstance().reference
+
+
+        //cargar las preferencias
+        val sharedPreference = SharedPreferences(this)
+        val datosUser = sharedPreference.getData("UserData")
+        if (datosUser != null) {
+            userId = datosUser.id
+            role = if (datosUser.role) 1 else 0
+        } else {
+            Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
+        }
+
 
         setupRetrofit()
         loadInformation()
@@ -102,54 +118,67 @@ class SpecialistProfileActivity : AppCompatActivity() {
     private fun loadInformation() {
         lifecycleScope.launch {
             try {
-                val clientResponse = specialistService.getSpecialist(specialistId)
-                userId = clientResponse.userId
-                val userResponse = userService.getUser(userId)
+                val response = specialistService.getSpecialistIdByUserAndRole(userId, role.toString())
+                if (response.isSuccessful) {
+                    val specialistIdResponse = response.body()
+                    if (specialistIdResponse != null) {
+                        specialistId = specialistIdResponse.specialist_id
+                        val specialistResponse = specialistService.getSpecialist(specialistId)
 
-                ubicationId = userResponse.ubicationId
-                val ubicationResponse = ubicationService.getUbication(ubicationId)
+                        userId = specialistResponse.userId
+                        val userResponse = userService.getUser(userId)
 
-                professionId = clientResponse.professionId
-                val professionResponse = professionService.getProfession(professionId)
-                runOnUiThread {
-                    // Actualizar la UI con la información cargada
-                    val etName = findViewById<EditText>(R.id.etName)
-                    val etLastname = findViewById<EditText>(R.id.etLastname)
-                    val etPhone = findViewById<EditText>(R.id.etPhone)
-                    val etBirthday = findViewById<EditText>(R.id.etBirthday)
-                    val etDescription = findViewById<EditText>(R.id.etDescription)
-                    val etAddress = findViewById<EditText>(R.id.etAddress)
-                    val etEmail = findViewById<EditText>(R.id.etEmailAddress)
-                    val etPrice = findViewById<EditText>(R.id.etPrice)
-                    val etWorkExperience = findViewById<EditText>(R.id.etWorkExperience)
-                    val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
+                        ubicationId = userResponse.ubicationId
+                        val ubicationResponse = ubicationService.getUbication(ubicationId)
 
-                    etName.setText(userResponse.firstName)
-                    etLastname.setText(userResponse.lastName)
-                    etPhone.setText(userResponse.phone)
-                    etBirthday.setText(userResponse.birthdate)
-                    etDescription.setText(userResponse.description)
-                    etAddress.setText(ubicationResponse.address)
-                    etEmail.setText(userResponse.email)
-                    districtId = ubicationResponse.districtId
-                    etPrice.setText(clientResponse.consultationPrice.toString())
-                    etWorkExperience.setText(clientResponse.workExperience.toString())
+                        professionId = specialistResponse.professionId
+                        val professionResponse = professionService.getProfession(professionId)
+                        runOnUiThread {
+                            // Actualizar la UI con la información cargada
+                            val etName = findViewById<EditText>(R.id.etName)
+                            val etLastname = findViewById<EditText>(R.id.etLastname)
+                            val etPhone = findViewById<EditText>(R.id.etPhone)
+                            val etBirthday = findViewById<EditText>(R.id.etBirthday)
+                            val etDescription = findViewById<EditText>(R.id.etDescription)
+                            val etAddress = findViewById<EditText>(R.id.etAddress)
+                            val etEmail = findViewById<EditText>(R.id.etEmailAddress)
+                            val etPrice = findViewById<EditText>(R.id.etPrice)
+                            val etWorkExperience = findViewById<EditText>(R.id.etWorkExperience)
+                            val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
 
-                    // Cargar la imagen del usuario desde la URL de la API utilizando Glide
-                    if (userResponse.avatar != null) {
-                        Glide.with(this@SpecialistProfileActivity)
-                            .load(userResponse.avatar)
-                            .placeholder(R.drawable.default_user)
-                            .into(ivUser)
+                            etName.setText(userResponse.firstName)
+                            etLastname.setText(userResponse.lastName)
+                            etPhone.setText(userResponse.phone)
+                            etBirthday.setText(userResponse.birthdate)
+                            etDescription.setText(userResponse.description)
+                            etAddress.setText(ubicationResponse.address)
+                            etEmail.setText(userResponse.email)
+                            districtId = ubicationResponse.districtId
+                            etPrice.setText(specialistResponse.consultationPrice.toString())
+                            etWorkExperience.setText(specialistResponse.workExperience.toString())
+
+                            // Cargar la imagen del usuario desde la URL de la API utilizando Glide
+                            if (userResponse.avatar != null) {
+                                Glide.with(this@SpecialistProfileActivity)
+                                    .load(userResponse.avatar)
+                                    .placeholder(R.drawable.default_user)
+                                    .into(ivUser)
+                            } else {
+                                //Si no hay imagen se le da una imagen default
+                                ivUser.setImageResource(R.drawable.default_user)
+                            }
+                        }
                     } else {
-                        //Si no hay imagen se le da una imagen default
-                        ivUser.setImageResource(R.drawable.default_user)
+                        throw Exception("Client ID response body is null")
                     }
+                } else {
+                    throw Exception("Failed to fetch specialist ID: ${response.code()}")
                 }
             } catch (e: Exception) {
                 runOnUiThread {
                     // Manejar errores de carga de información
                     Toast.makeText(this@SpecialistProfileActivity, "Error al cargar la información", Toast.LENGTH_SHORT).show()
+                    Log.e("SpecialistProfileActivity", "Error loading information", e)
                 }
             }
         }

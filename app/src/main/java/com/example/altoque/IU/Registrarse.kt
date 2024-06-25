@@ -1,6 +1,7 @@
 package com.example.altoque.IU
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -35,6 +36,7 @@ class Registrarse : AppCompatActivity() {
         val btEspecialista = findViewById<Button>(R.id.btEspecialista)
 
         val tvIniciarSesion = findViewById<TextView>(R.id.tvIniciarSesion)
+        val txtTyc = findViewById<TextView>(R.id.txtTyc)
         var rol = true
 
         btRegistrarme.setOnClickListener {
@@ -44,10 +46,15 @@ class Registrarse : AppCompatActivity() {
         tvIniciarSesion.setOnClickListener{
             iniciarsesion()
         }
+        txtTyc.setOnClickListener {
+            val url = "https://www.freeprivacypolicy.com/live/16ba85fe-78c3-46c2-947c-453b7345040d"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
 
         btCliente.setOnClickListener{rol = true }
         btEspecialista.setOnClickListener{rol = false }
-
     }
 
     private fun registro(rol: Boolean) {

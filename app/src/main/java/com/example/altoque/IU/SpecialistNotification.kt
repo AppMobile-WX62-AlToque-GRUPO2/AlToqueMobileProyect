@@ -78,16 +78,11 @@ class SpecialistNotification : AppCompatActivity() {
                 }
             })
 
-        val clientService = retrofit.create(ClientService::class.java)
         val userService = retrofit.create(UserService::class.java)
 
         lifecycleScope.launch {
             try {
-                val clientResponse = clientService.getClient(1)
-
-                val userId = clientResponse.userId
                 val userResponse = userService.getUser(userId)
-
                 runOnUiThread {
                     val rvNotiImage = findViewById<ImageView>(R.id.rvNotiImage)
                     if (userResponse.avatar != null) {
@@ -96,7 +91,7 @@ class SpecialistNotification : AppCompatActivity() {
                             .placeholder(R.drawable.default_user)
                             .into(rvNotiImage)
                     } else {
-                        //Si no hay imagen se le da una imagen default
+                        // If no image is available, set a default image
                         rvNotiImage.setImageResource(R.drawable.default_user)
                     }
                 }

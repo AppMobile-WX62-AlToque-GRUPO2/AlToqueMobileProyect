@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -25,6 +26,7 @@ import com.example.altoque.R
 import com.example.altoque.models.Ubication
 import com.example.altoque.models.UpdateUserRequest
 import com.example.altoque.networking.ClientService
+import com.example.altoque.networking.SharedPreferences
 import com.example.altoque.networking.UbicationService
 import com.example.altoque.networking.UserService
 import com.google.firebase.storage.FirebaseStorage
@@ -42,6 +44,7 @@ class clientProfileActivity : AppCompatActivity() {
     // IDs de cliente, usuario, ubicación y distrito
     private var clientId = 1
     private var userId = 1
+    private var role = 1
     private var ubicationId = 1
     private var districtId = 1
 
@@ -66,6 +69,17 @@ class clientProfileActivity : AppCompatActivity() {
 
         // Inicializar referencia de almacenamiento de Firebase
         storageRef = FirebaseStorage.getInstance().reference
+
+        //cargar las preferencias
+        val sharedPreference = SharedPreferences(this)
+        val datosUser = sharedPreference.getData("UserData")
+        if (datosUser != null) {
+            userId = datosUser.id
+            role = if (datosUser.role) 1 else 0
+        } else {
+            Toast.makeText(this, "No se pudo obtener el ID del usuario", Toast.LENGTH_SHORT).show()
+        }
+
 
         setupRetrofit()
         loadInformation()
@@ -97,48 +111,62 @@ class clientProfileActivity : AppCompatActivity() {
     private fun loadInformation() {
         lifecycleScope.launch {
             try {
-                val clientResponse = clientService.getClient(clientId)
-                userId = clientResponse.userId
-                val userResponse = userService.getUser(userId)
-                ubicationId = userResponse.ubicationId
-                val ubicationResponse = ubicationService.getUbication(ubicationId)
-                runOnUiThread {
-                    val etName = findViewById<EditText>(R.id.etName)
-                    val etLastname = findViewById<EditText>(R.id.etLastname)
-                    val etPhone = findViewById<EditText>(R.id.etPhone)
-                    val etBirthday = findViewById<EditText>(R.id.etBirthday)
-                    val etDescription = findViewById<EditText>(R.id.etDescription)
-                    val etAddress = findViewById<EditText>(R.id.etAddress)
-                    val etEmail = findViewById<EditText>(R.id.etEmailAddress)
-                    val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
+                val response = clientService.getClientIdByUserAndRole(userId, role.toString())
+                if (response.isSuccessful) {
+                    val clientIdResponse = response.body()
+                    if (clientIdResponse != null) {
+                        clientId = clientIdResponse.client_id
+                        val clientResponse = clientService.getClient(clientId)
+                        userId = clientResponse.userId
+                        val userResponse = userService.getUser(userId)
+                        ubicationId = userResponse.ubicationId
+                        val ubicationResponse = ubicationService.getUbication(ubicationId)
 
-                    etName.setText(userResponse.firstName)
-                    etLastname.setText(userResponse.lastName)
-                    etPhone.setText(userResponse.phone)
-                    etBirthday.setText(userResponse.birthdate)
-                    etDescription.setText(userResponse.description)
-                    etAddress.setText(ubicationResponse.address)
-                    etEmail.setText(userResponse.email)
-                    districtId = ubicationResponse.districtId
+                        runOnUiThread {
+                            val etName = findViewById<EditText>(R.id.etName)
+                            val etLastname = findViewById<EditText>(R.id.etLastname)
+                            val etPhone = findViewById<EditText>(R.id.etPhone)
+                            val etBirthday = findViewById<EditText>(R.id.etBirthday)
+                            val etDescription = findViewById<EditText>(R.id.etDescription)
+                            val etAddress = findViewById<EditText>(R.id.etAddress)
+                            val etEmail = findViewById<EditText>(R.id.etEmailAddress)
+                            val ivUser = findViewById<ImageView>(R.id.ivUserShowClientActivity)
 
-                    // Cargar la imagen del usuario desde la URL de la API utilizando Glide
-                    if (userResponse.avatar != null) {
-                        Glide.with(this@clientProfileActivity)
-                            .load(userResponse.avatar)
-                            .placeholder(R.drawable.default_user)
-                            .into(ivUser)
+                            etName.setText(userResponse.firstName)
+                            etLastname.setText(userResponse.lastName)
+                            etPhone.setText(userResponse.phone)
+                            etBirthday.setText(userResponse.birthdate)
+                            etDescription.setText(userResponse.description)
+                            etAddress.setText(ubicationResponse.address)
+                            etEmail.setText(userResponse.email)
+                            districtId = ubicationResponse.districtId
+
+                            // Cargar la imagen del usuario utilizando Glide
+                            if (userResponse.avatar != null) {
+                                Glide.with(this@clientProfileActivity)
+                                    .load(userResponse.avatar)
+                                    .placeholder(R.drawable.default_user)
+                                    .into(ivUser)
+                            } else {
+                                // Si no hay imagen, mostrar imagen default
+                                ivUser.setImageResource(R.drawable.default_user)
+                            }
+                        }
                     } else {
-                        //Si no hay imagen se le da una imagen default
-                        ivUser.setImageResource(R.drawable.default_user)
+                        throw Exception("Client ID response body is null")
                     }
+                } else {
+                    throw Exception("Failed to fetch client ID: ${response.code()}")
                 }
             } catch (e: Exception) {
                 runOnUiThread {
-                    Toast.makeText(this@clientProfileActivity, "Error al cargar la información", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@clientProfileActivity, "Error al cargar la información: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("ClientProfileActivity", "Error loading information", e)
                 }
             }
         }
     }
+
 
     // Configuración de la vista y manejo de eventos
     private fun setupView() {
@@ -251,7 +279,10 @@ class clientProfileActivity : AppCompatActivity() {
             dialog.dismiss()
             // Regresar al perfil del cliente después de la confirmación
             val intent = Intent(this, ShowClientProfileActivity::class.java)
+            // Limpiar el stack de tareas
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
+            finish()
         }
         builder.show()
     }
