@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginBottom="152dp"
         android:backgroundTint="#FFB800"
         android:text="REGISTRARME"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -127,7 +127,11 @@
         android:layout_marginBottom="8dp"
         android:text="Repetir Contraseña"
         app:layout_constraintBottom_toTopOf="@+id/etRepiteContra"
-        tools:layout_editor_absoluteX="40dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etContra"
+        app:layout_constraintVertical_bias="0.538" />
 
     <TextView
         android:id="@+id/tvTienesCuenta"
@@ -168,4 +172,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.623" />
+
+    <TextView
+        android:id="@+id/txtTerminos"
+        android:layout_width="175dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="40dp"
+        android:text="Al hacer clic en Registrarse, aceptas los"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/btRegistrarme"
+        app:layout_constraintEnd_toStartOf="@+id/txtTyc"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etRepiteContra"
+        app:layout_constraintVertical_bias="0.472" />
+
+    <TextView
+        android:id="@+id/txtTyc"
+        android:layout_width="105dp"
+        android:layout_height="24dp"
+        android:text="Terminos y Condiciones"
+        android:textColor="#03A9F4"
+        android:textColorLink="#2196F3"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/btRegistrarme"
+        app:layout_constraintEnd_toStartOf="@+id/txtTerminos2"
+        app:layout_constraintStart_toEndOf="@+id/txtTerminos"
+        app:layout_constraintTop_toBottomOf="@+id/etRepiteContra" />
+
+    <TextView
+        android:id="@+id/txtTerminos2"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="40dp"
+        android:text="de AlToque!."
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/btRegistrarme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtTyc"
+        app:layout_constraintTop_toBottomOf="@+id/etRepiteContra" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
