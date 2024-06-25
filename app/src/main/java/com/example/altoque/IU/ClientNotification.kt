@@ -1,6 +1,7 @@
 package com.example.altoque.IU
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -28,6 +29,7 @@ class ClientNotification : AppCompatActivity()  {
     lateinit var notifications : List<Notification>
     lateinit var notificationAdapter: NotificationAdapter
     var userId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,6 +38,10 @@ class ClientNotification : AppCompatActivity()  {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        findViewById<ImageButton>(R.id.imBackNoti).setOnClickListener {
+            onBackPressed()
         }
 
 

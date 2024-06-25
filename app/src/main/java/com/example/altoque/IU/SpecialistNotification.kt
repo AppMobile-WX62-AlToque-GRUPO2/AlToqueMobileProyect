@@ -1,6 +1,8 @@
 package com.example.altoque.IU
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -28,6 +30,7 @@ class SpecialistNotification : AppCompatActivity() {
     lateinit var notificationAdapter: NotificationAdapter
     var userId: Int = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,6 +39,10 @@ class SpecialistNotification : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        findViewById<ImageButton>(R.id.imBackNoti1).setOnClickListener {
+            onBackPressed()
         }
 
         notificationAdapter = NotificationAdapter(emptyList())
