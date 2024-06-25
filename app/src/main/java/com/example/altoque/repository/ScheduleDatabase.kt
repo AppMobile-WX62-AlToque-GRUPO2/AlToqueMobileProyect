@@ -19,7 +19,7 @@ abstract class ScheduleDatabase : RoomDatabase() {
         fun getInstance(context: Context) : ScheduleDatabase{
             if (INSTANCE == null){
                 INSTANCE = Room
-                    .databaseBuilder(context, ScheduleDatabase::class.java, "schedulev4.db")
+                    .databaseBuilder(context, ScheduleDatabase::class.java, "schedulev5.db")
                     .allowMainThreadQueries()
                     .build()
             }

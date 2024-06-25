@@ -6,7 +6,8 @@
     <string name="et_desc_post">Descripción</string>
     <string name="et_spc_post">Especialidad</string>
     <string name="et_time_post">Horario</string>
-    <string name="bt_send_post">Publicar</string>
+    <string name="bt_send_post">Siguiente</string>
+    <string name="bt_cancel_post">Cancelar</string>
     <string name="bt_to_create">Crear una publicación</string>
     <string name="mi_perfil">Mi Perfil</string>
     <string name="profile">Ver perfil</string>
@@ -91,7 +92,7 @@
     <string name="especialista">Especialista</string>
     <string name="create_post_camara_desc">button to take a picture of the customer\'s problem</string>
     <string name="create_post_image_desc">image of customer problem</string>
-    <string name="prototype_datetime_date">Fecha</string>
+    <string name="prototype_datetime_date">Día</string>
     <string name="title_datetime">Horarios</string>
     <string name="symbol_add_datetime">+</string>
     <string name="accept_schedule_creation">Aceptar</string>

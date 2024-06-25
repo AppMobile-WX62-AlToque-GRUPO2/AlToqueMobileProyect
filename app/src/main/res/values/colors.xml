@@ -11,4 +11,5 @@
     <color name="finished">#1435E2</color>
 
     <color name="btn_finish">#349513</color>
+    <color name="btn_cancel">#FFFF4141</color>
 </resources>

@@ -139,13 +139,24 @@
                 android:id="@+id/btPost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/bt_send_post"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btCancelPost"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+
+            <Button
+                android:id="@+id/btCancelPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="70dp"
+                android:backgroundTint="@color/btn_cancel"
+                android:text="@string/bt_cancel_post"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btPost"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -37,7 +37,7 @@
             android:background="#E4E4E4"
             android:ems="10"
             android:hint="@string/prototype_datetime_date"
-            android:inputType="date"
+            android:inputType="text"
             tools:layout_editor_absoluteX="51dp"
             tools:layout_editor_absoluteY="71dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -87,24 +87,25 @@
             tools:layout_editor_absoluteX="51dp"
             tools:layout_editor_absoluteY="71dp" />
     </com.google.android.material.textfield.TextInputLayout>
-    
+
     <Button
         android:id="@+id/btCancelSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginEnd="70dp"
+        android:backgroundTint="@color/btn_cancel"
         android:text="@string/cancel_schedule_creation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
-    
+        app:layout_constraintBaseline_toBaselineOf="@+id/btAcceptSchedule"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/btAcceptSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="100dp"
         android:text="@string/accept_schedule_creation"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btCancelSchedule"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
